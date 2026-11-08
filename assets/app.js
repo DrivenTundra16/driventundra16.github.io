@@ -127,8 +127,8 @@ const PROJECTS = [
     lang: "Dart",
     color: "#00B4AB",
     url: "https://github.com/kyomufs/tulgusch",
-    en: "Rhythm — a Material 3 Expressive schedule, grade journal and deadlines companion for Android and iOS, shipped through CI-built releases.",
-    ru: "Rhythm — расписание, журнал оценок и дедлайны в Material 3 Expressive для Android и iOS, релизы собираются в CI."
+    en: "Tulgusch — a Material 3 Expressive schedule, grade journal and deadlines companion for Android and iOS, shipped through CI-built releases.",
+    ru: "Tulgusch — расписание, журнал оценок и дедлайны в Material 3 Expressive для Android и iOS, релизы собираются в CI."
   },
   {
     name: "free-ai-router",
