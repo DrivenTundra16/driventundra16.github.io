@@ -100,18 +100,83 @@ try {
     <div class="hero__panel">
       <m3e-card class="terminal" variant="elevated">
         <div slot="header" class="terminal__bar">
-          <span class="terminal__mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="m5 7 5 5-5 5M13 17h6"/></svg>
-          </span>
-          <span class="terminal__title">zsh — ~</span>
+          <div class="terminal__dots">
+            <span class="terminal__dot terminal__dot--close"></span>
+            <span class="terminal__dot terminal__dot--min"></span>
+            <span class="terminal__dot terminal__dot--max"></span>
+          </div>
+          <div class="terminal__tabs">
+            <button class="terminal__tab is-active" data-pane="fetch">
+              <m3e-icon name="terminal"></m3e-icon>
+              <span>fetch.sh</span>
+            </button>
+            <button class="terminal__tab" data-pane="flake">
+              <m3e-icon name="code"></m3e-icon>
+              <span>flake.nix</span>
+            </button>
+            <button class="terminal__tab" data-pane="tulgusch">
+              <m3e-icon name="smartphone"></m3e-icon>
+              <span>tulgusch.dart</span>
+            </button>
+          </div>
+          <button class="terminal__copy" id="termCopyBtn" aria-label="Copy terminal content">
+            <m3e-icon name="content_copy"></m3e-icon>
+          </button>
         </div>
-        <pre slot="content" class="terminal__body"><span class="t-prompt">$</span> whoami
-<span class="t-out">matvey — applied informatics, 3rd year</span>
-<span class="t-prompt">$</span> nix flake show --all-systems
-<span class="t-out">desktop · services · secrets</span>
-<span class="t-prompt">$</span> nixos-version
-<span class="t-out">26.05 · Hyprland · Wayland</span>
-<span class="t-prompt">$</span> <span class="t-cursor">▍</span></pre>
+        <div slot="content" class="terminal__body">
+          <div class="terminal__pane is-active" id="pane-fetch"><span class="t-prompt">kyomufs@asusfx506hc</span> <span class="t-out">~</span> <span class="t-prompt">$</span> <span class="t-cmd">fastfetch --pipe</span>
+<span class="t-key">  OS      </span> <span class="t-val">NixOS 26.05 (x86_64)</span>
+<span class="t-key">  Host    </span> <span class="t-val">ASUS TUF Dash F15 (asusfx506hc)</span>
+<span class="t-key">  Kernel  </span> <span class="t-val">Linux 6.12.x-zen</span>
+<span class="t-key">  WM      </span> <span class="t-val t-accent">Hyprland</span> · Wayland + Quickshell
+<span class="t-key">  Shell   </span> <span class="t-val">zsh 5.9 + starship</span>
+<span class="t-key">  Stack   </span> <span class="t-val">Go · Dart · C++ · TypeScript · Nix</span>
+<span class="t-key">  Uptime  </span> <span class="t-val">3rd year student · TSU (ИПОАС)</span>
+
+<div class="terminal__palette">
+  <span class="t-pill" style="background:#ff7a93;"></span>
+  <span class="t-pill" style="background:#79dcaa;"></span>
+  <span class="t-pill" style="background:#f6c177;"></span>
+  <span class="t-pill" style="background:#7aa2f7;"></span>
+  <span class="t-pill" style="background:#bb9af7;"></span>
+  <span class="t-pill" style="background:#7dcfff;"></span>
+  <span class="t-pill" style="background:#c0caf5;"></span>
+  <span class="t-pill" style="background:#414868;"></span>
+</div>
+<span class="t-prompt">kyomufs@asusfx506hc</span> <span class="t-out">~</span> <span class="t-prompt">$</span> <span class="t-cursor">█</span></div>
+
+          <div class="terminal__pane" id="pane-flake"><span class="t-comment"># Single-source NixOS Flake infrastructure</span>
+<span class="t-kw">{</span>
+  description = <span class="t-str">"kyomufs declarative system & secrets"</span>;
+  inputs = <span class="t-kw">{</span>
+    nixpkgs.url = <span class="t-str">"github:nixos/nixpkgs/nixos-unstable"</span>;
+    home-manager.url = <span class="t-str">"github:nix-community/home-manager"</span>;
+    hyprland.url = <span class="t-str">"github:hyprwm/Hyprland"</span>;
+  <span class="t-kw">}</span>;
+  outputs = <span class="t-kw">{</span> self, nixpkgs, ... <span class="t-kw">}</span>@inputs: <span class="t-kw">{</span>
+    nixosConfigurations.asusfx506hc = nixpkgs.lib.nixosSystem <span class="t-kw">{</span>
+      system = <span class="t-str">"x86_64-linux"</span>;
+      modules = [ <span class="t-fn">./hosts/asusfx506hc</span> <span class="t-fn">./modules/desktop</span> ];
+    <span class="t-kw">}</span>;
+  <span class="t-kw">}</span>;
+<span class="t-kw">}</span></div>
+
+          <div class="terminal__pane" id="pane-tulgusch"><span class="t-comment">// Material 3 Expressive schedule companion</span>
+<span class="t-kw">class</span> <span class="t-fn">TulguschApp</span> <span class="t-kw">extends</span> StatelessWidget <span class="t-kw">{</span>
+  <span class="t-kw">@override</span>
+  Widget build(BuildContext context) <span class="t-kw">{</span>
+    <span class="t-kw">return</span> MaterialApp(
+      theme: ThemeData(
+        useMaterial3: <span class="t-str">true</span>,
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(<span class="t-str">0xFF7AA2F7</span>)),
+      ),
+      home: ExpressiveScheduleScreen(
+        motion: MotionScheme.expressive(spring: Springs.fastSpatial),
+      ),
+    );
+  <span class="t-kw">}</span>
+<span class="t-kw">}</span></div>
+        </div>
       </m3e-card>
       <div class="avatar">
         <img src="assets/avatar.png" alt="kyomufs avatar" width="40" height="40" loading="lazy" />

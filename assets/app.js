@@ -88,39 +88,45 @@ const I18N = {
 const SKILLS = [
   {
     icon: "code",
-    en: "Languages",
-    ru: "Языки",
+    en: "Languages & Runtimes",
+    ru: "Языки и рантаймы",
     items: ["C", "C++", "ASM", "Go", "TypeScript", "JavaScript", "Python", "Bash", "R", "Dart", "Kotlin"]
   },
   {
     icon: "dns",
-    en: "Systems & infrastructure",
-    ru: "Системы и инфраструктура",
-    items: ["NixOS", "Linux", "Docker", "Caddy", "Gitea", "Git", "GitHub"]
+    en: "Systems & Distros",
+    ru: "Системы и дистрибутивы",
+    items: ["NixOS", "Arch Linux", "Debian", "Ubuntu", "Linux", "Docker", "Caddy", "Git", "GitHub", "Gitea"]
+  },
+  {
+    icon: "desktop_windows",
+    en: "Wayland & Desktops",
+    ru: "Wayland & Десктоп",
+    items: ["Hyprland", "Niri", "KDE Plasma", "GNOME", "Quickshell", "Qt / QML", "Layer Shell", "MangoHud"]
   },
   {
     icon: "layers",
-    en: "Web & mobile",
-    ru: "Веб и мобильная разработка",
-    items: ["React", "Node.js", "Flutter", "Jetpack Compose", "QML"]
+    en: "Client & Mobile",
+    ru: "Клиент & Мобилка",
+    items: ["Flutter", "React", "Node.js", "Jetpack Compose"]
   },
   {
     icon: "database",
-    en: "Data",
-    ru: "Данные",
+    en: "Databases & Storage",
+    ru: "Базы данных",
     items: ["PostgreSQL", "MySQL", "SQLite", "SQLAlchemy"]
   },
   {
     icon: "hub",
-    en: "Networks",
-    ru: "Сети",
-    items: ["KeeneticOS", "RouterOS", "OpenWrt", "VLAN", "DHCP/DNS"]
+    en: "Network & Edge Routing",
+    ru: "Сетевой роутинг & Edge",
+    items: ["RouterOS (MikroTik)", "OpenWrt", "KeeneticOS", "Edge Routing & NAT", "VLAN Segmentation", "DNS / DHCP"]
   },
   {
     icon: "auto_awesome",
-    en: "AI tooling",
-    ru: "AI-инструменты",
-    items: ["Copilot", "Hermes", "OpenCode", "Crush", "DeepSeek Harness", "LoRA"]
+    en: "AI & Autonomous Agents",
+    ru: "AI & Автономные агенты",
+    items: ["DeepSeek Harness", "OpenCode", "Hermes Agent", "Copilot", "Crush", "LoRA Fine-tuning"]
   }
 ];
 
@@ -534,6 +540,33 @@ function initGraph() {
   skillsGraphInstance = new SkillsGraph(canvas, wrap, getThemeColors);
 }
 
+function setupTerminalTabs() {
+  const tabs = document.querySelectorAll(".terminal__tab");
+  const panes = document.querySelectorAll(".terminal__pane");
+  const copyBtn = $("#termCopyBtn");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const paneId = tab.dataset.pane;
+      tabs.forEach((t) => t.classList.toggle("is-active", t === tab));
+      panes.forEach((p) => p.classList.toggle("is-active", p.id === `pane-${paneId}`));
+    });
+  });
+
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const activePane = document.querySelector(".terminal__pane.is-active");
+      if (!activePane) return;
+      try {
+        await navigator.clipboard.writeText(activePane.innerText);
+        const icon = copyBtn.querySelector("m3e-icon");
+        if (icon) icon.name = "check";
+        setTimeout(() => { if (icon) icon.name = "content_copy"; }, 1500);
+      } catch (e) {}
+    });
+  }
+}
+
 function init() {
   applyTheme(state.theme);
   applyLanguage(state.lang);
@@ -543,6 +576,7 @@ function init() {
   setupStickerTilt();
   setupSkillsViewToggle();
   setupButtonGroups();
+  setupTerminalTabs();
   initGraph();
 
   $("#year").textContent = String(new Date().getFullYear());

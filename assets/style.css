@@ -395,52 +395,121 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   background: var(--md-sys-color-primary-container);
   opacity: 0.4;
 }
-.terminal { --m3e-card-padding: 0px; overflow: hidden; }
+.terminal { --m3e-card-padding: 0px; overflow: hidden; border-radius: var(--md-sys-shape-xl); }
 .terminal__bar {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  background: var(--md-sys-color-surface-container);
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--md-sys-color-surface-container-high);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
 }
-/* иконка-контейнер вместо macOS-светофора: тот же M3-приём, что у skill__title */
-.terminal__mark {
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  border-radius: var(--md-sys-shape-sm);
-  background: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
+.terminal__dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-.terminal__mark svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.terminal__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--md-sys-shape-full);
 }
-.terminal__title {
+.terminal__dot--close { background: #ff5f56; }
+.terminal__dot--min { background: #ffbd2e; }
+.terminal__dot--max { background: #27c93f; }
+
+.terminal__tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 6px;
+}
+.terminal__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--md-sys-shape-xs);
   font-family: var(--mono);
-  font-size: var(--ts-label-medium-size);
+  font-size: 0.78rem;
+  font-weight: 500;
   color: var(--md-sys-color-on-surface-variant);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--motion-fast-effects), color var(--motion-fast-effects);
 }
+.terminal__tab:hover {
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
+  color: var(--md-sys-color-on-surface);
+}
+.terminal__tab.is-active {
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-primary);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+.terminal__tab m3e-icon { --m3e-icon-size: 14px; }
+
+.terminal__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--md-sys-shape-xs);
+  background: transparent;
+  border: none;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+}
+.terminal__copy:hover {
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
+  color: var(--md-sys-color-on-surface);
+}
+.terminal__copy m3e-icon { --m3e-icon-size: 14px; }
+
 .terminal__body {
   margin: 0;
-  padding: 22px 20px 24px;
+  padding: 18px 20px 22px;
   font-family: var(--mono);
-  font-size: 0.875rem;
-  line-height: 1.9;
+  font-size: 0.84rem;
+  line-height: 1.75;
   color: var(--md-sys-color-on-surface);
+  background: color-mix(in srgb, var(--md-sys-color-surface) 95%, black);
+  min-height: 240px;
   white-space: pre-wrap;
   word-break: break-word;
 }
+.terminal__pane { display: none; }
+.terminal__pane.is-active { display: block; }
+
 .t-prompt { color: var(--md-sys-color-primary); font-weight: 700; }
+.t-cmd { color: var(--md-sys-color-on-surface); font-weight: 600; }
 .t-out { color: var(--md-sys-color-on-surface-variant); }
+.t-key { color: var(--md-sys-color-primary); font-weight: 600; }
+.t-val { color: var(--md-sys-color-on-surface); }
+.t-accent { color: var(--md-sys-color-tertiary); }
+.t-kw { color: #bb9af7; font-weight: 600; }
+.t-str { color: #9ece6a; }
+.t-fn { color: #7aa2f7; }
+.t-comment { color: #565f89; font-style: italic; }
 .t-cursor { color: var(--md-sys-color-primary); animation: blink 1.15s step-end infinite; }
 @keyframes blink { 50% { opacity: 0; } }
+
+.terminal__palette {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 8px;
+}
+.t-pill {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--md-sys-shape-full);
+}
 
 .avatar {
   display: flex;

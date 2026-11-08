@@ -26,11 +26,12 @@ export class SkillsGraph {
     // Hubs (Categories)
     const hubs = [
       { id: 'cat-lang', label: 'Languages', labelRu: 'Языки', isHub: true, color: '#7aa2f7', icon: 'code', r: 18 },
-      { id: 'cat-sys', label: 'Systems', labelRu: 'Системы', isHub: true, color: '#bb9af7', icon: 'dns', r: 18 },
-      { id: 'cat-web', label: 'Web & Mobile', labelRu: 'Веб & Мобилка', isHub: true, color: '#7dcfff', icon: 'layers', r: 18 },
-      { id: 'cat-data', label: 'Data', labelRu: 'Данные', isHub: true, color: '#73daca', icon: 'database', r: 18 },
-      { id: 'cat-net', label: 'Networks', labelRu: 'Сети', isHub: true, color: '#ff9e64', icon: 'hub', r: 18 },
-      { id: 'cat-ai', label: 'AI Tooling', labelRu: 'AI Стек', isHub: true, color: '#f7768e', icon: 'auto_awesome', r: 18 }
+      { id: 'cat-sys', label: 'Systems & Distros', labelRu: 'Системы и Дистрибутивы', isHub: true, color: '#bb9af7', icon: 'dns', r: 18 },
+      { id: 'cat-wm', label: 'Wayland & Desktops', labelRu: 'Wayland & Десктоп', isHub: true, color: '#2ac3de', icon: 'desktop_windows', r: 18 },
+      { id: 'cat-web', label: 'Client & Mobile', labelRu: 'Клиент & Мобилка', isHub: true, color: '#7dcfff', icon: 'layers', r: 18 },
+      { id: 'cat-data', label: 'Databases', labelRu: 'Базы данных', isHub: true, color: '#73daca', icon: 'database', r: 18 },
+      { id: 'cat-net', label: 'Edge & Networks', labelRu: 'Сетевой роутинг', isHub: true, color: '#ff9e64', icon: 'hub', r: 18 },
+      { id: 'cat-ai', label: 'AI & Agents', labelRu: 'AI & Агенты', isHub: true, color: '#f7768e', icon: 'auto_awesome', r: 18 }
     ];
 
     const techData = [
@@ -47,8 +48,11 @@ export class SkillsGraph {
       { id: 'dart', label: 'Dart', cat: 'cat-lang' },
       { id: 'kotlin', label: 'Kotlin', cat: 'cat-lang' },
 
-      // Systems
+      // Systems & Distros
       { id: 'nixos', label: 'NixOS', cat: 'cat-sys' },
+      { id: 'arch', label: 'Arch Linux', cat: 'cat-sys' },
+      { id: 'debian', label: 'Debian', cat: 'cat-sys' },
+      { id: 'ubuntu', label: 'Ubuntu', cat: 'cat-sys' },
       { id: 'linux', label: 'Linux', cat: 'cat-sys' },
       { id: 'docker', label: 'Docker', cat: 'cat-sys' },
       { id: 'caddy', label: 'Caddy', cat: 'cat-sys' },
@@ -56,33 +60,43 @@ export class SkillsGraph {
       { id: 'git', label: 'Git', cat: 'cat-sys' },
       { id: 'github', label: 'GitHub', cat: 'cat-sys' },
 
-      // Web & Mobile
+      // Wayland & Desktops
+      { id: 'hyprland', label: 'Hyprland', cat: 'cat-wm' },
+      { id: 'niri', label: 'Niri', cat: 'cat-wm' },
+      { id: 'kde', label: 'KDE Plasma', cat: 'cat-wm' },
+      { id: 'gnome', label: 'GNOME', cat: 'cat-wm' },
+      { id: 'quickshell', label: 'Quickshell', cat: 'cat-wm' },
+      { id: 'qml', label: 'Qt / QML', cat: 'cat-wm' },
+      { id: 'layershell', label: 'Layer Shell', cat: 'cat-wm' },
+      { id: 'mangohud', label: 'MangoHud', cat: 'cat-wm' },
+
+      // Client & Mobile
+      { id: 'flutter', label: 'Flutter', cat: 'cat-web' },
       { id: 'react', label: 'React', cat: 'cat-web' },
       { id: 'node', label: 'Node.js', cat: 'cat-web' },
-      { id: 'flutter', label: 'Flutter', cat: 'cat-web' },
       { id: 'compose', label: 'Jetpack Compose', cat: 'cat-web' },
-      { id: 'qml', label: 'QML', cat: 'cat-web' },
 
-      // Data
+      // Databases
       { id: 'postgres', label: 'PostgreSQL', cat: 'cat-data' },
       { id: 'mysql', label: 'MySQL', cat: 'cat-data' },
       { id: 'sqlite', label: 'SQLite', cat: 'cat-data' },
       { id: 'sa', label: 'SQLAlchemy', cat: 'cat-data' },
 
-      // Networks
-      { id: 'keenetic', label: 'KeeneticOS', cat: 'cat-net' },
+      // Edge & Networks
       { id: 'routeros', label: 'RouterOS', cat: 'cat-net' },
       { id: 'openwrt', label: 'OpenWrt', cat: 'cat-net' },
-      { id: 'vlan', label: 'VLAN', cat: 'cat-net' },
-      { id: 'dns', label: 'DHCP/DNS', cat: 'cat-net' },
+      { id: 'keenetic', label: 'KeeneticOS', cat: 'cat-net' },
+      { id: 'routing', label: 'Edge Routing & NAT', cat: 'cat-net' },
+      { id: 'vlan', label: 'VLAN Segmentation', cat: 'cat-net' },
+      { id: 'dnsdhcp', label: 'DNS / DHCP', cat: 'cat-net' },
 
-      // AI Tooling
-      { id: 'copilot', label: 'Copilot', cat: 'cat-ai' },
-      { id: 'hermes', label: 'Hermes', cat: 'cat-ai' },
-      { id: 'opencode', label: 'OpenCode', cat: 'cat-ai' },
-      { id: 'crush', label: 'Crush', cat: 'cat-ai' },
+      // AI & Agents
       { id: 'dsh', label: 'DeepSeek Harness', cat: 'cat-ai' },
-      { id: 'lora', label: 'LoRA', cat: 'cat-ai' }
+      { id: 'opencode', label: 'OpenCode', cat: 'cat-ai' },
+      { id: 'hermes', label: 'Hermes Agent', cat: 'cat-ai' },
+      { id: 'copilot', label: 'Copilot', cat: 'cat-ai' },
+      { id: 'crush', label: 'Crush', cat: 'cat-ai' },
+      { id: 'lora', label: 'LoRA Fine-tuning', cat: 'cat-ai' }
     ];
 
     const crossEdges = [
@@ -92,15 +106,26 @@ export class SkillsGraph {
       ['ts', 'react'],
       ['js', 'ts'],
       ['nixos', 'linux'],
+      ['nixos', 'hyprland'],
       ['nixos', 'bash'],
+      ['arch', 'linux'],
+      ['debian', 'ubuntu'],
       ['docker', 'caddy'],
+      ['hyprland', 'quickshell'],
+      ['niri', 'layershell'],
+      ['kde', 'qml'],
+      ['quickshell', 'qml'],
+      ['cpp', 'qml'],
+      ['c', 'cpp'],
+      ['c', 'asm'],
       ['py', 'sa'],
       ['postgres', 'sa'],
       ['py', 'lora'],
       ['dsh', 'opencode'],
       ['dsh', 'ts'],
-      ['qml', 'linux'],
-      ['go', 'cat-sys']
+      ['go', 'caddy'],
+      ['routeros', 'openwrt'],
+      ['mangohud', 'linux']
     ];
 
     this.nodes = [];
@@ -109,7 +134,7 @@ export class SkillsGraph {
     // Add hubs
     hubs.forEach((h, i) => {
       const angle = (i / hubs.length) * Math.PI * 2;
-      const dist = 160;
+      const dist = 175;
       this.nodes.push({
         id: h.id,
         label: h.label,
@@ -118,8 +143,8 @@ export class SkillsGraph {
         icon: h.icon,
         color: h.color,
         r: h.r,
-        x: 400 + Math.cos(angle) * dist,
-        y: 250 + Math.sin(angle) * dist,
+        x: 450 + Math.cos(angle) * dist,
+        y: 270 + Math.sin(angle) * dist,
         vx: 0,
         vy: 0
       });
@@ -129,7 +154,7 @@ export class SkillsGraph {
     techData.forEach((t) => {
       const parentHub = this.nodes.find(n => n.id === t.cat);
       const angle = Math.random() * Math.PI * 2;
-      const dist = 50 + Math.random() * 80;
+      const dist = 55 + Math.random() * 85;
       const node = {
         id: t.id,
         label: t.label,
@@ -137,8 +162,8 @@ export class SkillsGraph {
         isHub: false,
         color: parentHub ? parentHub.color : '#a9abb5',
         r: 6.5,
-        x: (parentHub ? parentHub.x : 400) + Math.cos(angle) * dist,
-        y: (parentHub ? parentHub.y : 250) + Math.sin(angle) * dist,
+        x: (parentHub ? parentHub.x : 450) + Math.cos(angle) * dist,
+        y: (parentHub ? parentHub.y : 270) + Math.sin(angle) * dist,
         vx: (Math.random() - 0.5) * 2,
         vy: (Math.random() - 0.5) * 2
       };
@@ -146,8 +171,8 @@ export class SkillsGraph {
       this.links.push({
         source: parentHub,
         target: node,
-        dist: 70,
-        strength: 0.04
+        dist: 72,
+        strength: 0.045
       });
     });
 
@@ -170,7 +195,7 @@ export class SkillsGraph {
   resize() {
     const rect = this.container.getBoundingClientRect();
     this.width = rect.width;
-    this.height = Math.max(460, Math.min(620, window.innerHeight * 0.6));
+    this.height = Math.max(480, Math.min(650, window.innerHeight * 0.65));
     this.canvas.width = this.width * this.dpr;
     this.canvas.height = this.height * this.dpr;
     this.canvas.style.width = `${this.width}px`;
@@ -261,9 +286,9 @@ export class SkillsGraph {
         const dx = n2.x - n1.x;
         const dy = n2.y - n1.y;
         const d2 = dx * dx + dy * dy + 1;
-        if (d2 < 60000) {
+        if (d2 < 65000) {
           const d = Math.sqrt(d2);
-          const rep = (n1.isHub || n2.isHub ? 1200 : 450) / (d2 + 100);
+          const rep = (n1.isHub || n2.isHub ? 1300 : 480) / (d2 + 100);
           const fx = (dx / d) * rep;
           const fy = (dy / d) * rep;
           n1.vx -= fx;
@@ -295,9 +320,8 @@ export class SkillsGraph {
       const n = this.nodes[i];
       if (n === this.draggedNode) continue;
 
-      // Gravity towards center
-      n.vx += (cx - n.x) * 0.0018;
-      n.vy += (cy - n.y) * 0.0018;
+      n.vx += (cx - n.x) * 0.0016;
+      n.vy += (cy - n.y) * 0.0016;
 
       n.vx *= damping;
       n.vy *= damping;
@@ -305,7 +329,6 @@ export class SkillsGraph {
       n.x += n.vx;
       n.y += n.vy;
 
-      // Bounding box padding
       const pad = n.r + 20;
       if (n.x < pad) { n.x = pad; n.vx *= -0.5; }
       if (n.x > this.width - pad) { n.x = this.width - pad; n.vx *= -0.5; }
@@ -323,7 +346,6 @@ export class SkillsGraph {
     const theme = this.getThemeColors ? this.getThemeColors() : { isDark: true };
     const h = this.hoveredNode;
 
-    // Check which nodes are connected to hovered
     const connectedNodeIds = new Set();
     if (h) {
       connectedNodeIds.add(h.id);
@@ -416,7 +438,6 @@ export class SkillsGraph {
         ctx.fillStyle = theme.isDark ? '#e3e5f0' : '#2f323a';
         ctx.fillText(labelText, n.x + n.r + 7, n.y + 4.5);
       } else {
-        // Only show leaf labels if hovered, connected, or screen is roomy
         const showLabel = isConnected || isHovered || !h;
         if (showLabel) {
           ctx.font = '500 11px "JetBrains Mono", monospace';
