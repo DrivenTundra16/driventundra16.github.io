@@ -40,10 +40,10 @@ try {
       <a href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="nav__controls">
-      <m3e-segmented-button id="langGroup" aria-label="Language">
-        <m3e-button-segment value="en" selected>EN</m3e-button-segment>
-        <m3e-button-segment value="ru">RU</m3e-button-segment>
-      </m3e-segmented-button>
+      <m3e-button-group id="langGroup" variant="connected" size="small" aria-label="Language">
+        <m3e-button variant="tonal" toggle selected value="en">EN</m3e-button>
+        <m3e-button variant="tonal" toggle value="ru">RU</m3e-button>
+      </m3e-button-group>
       <m3e-icon-button id="themeBtn" variant="standard" aria-label="Switch theme">
         <m3e-icon name="dark_mode"></m3e-icon>
       </m3e-icon-button>
@@ -69,11 +69,32 @@ try {
           GitHub
         </m3e-button>
       </div>
-      <ul class="hero__meta">
-        <li><span class="dot"></span><span data-i18n="hero.metaLocation">Tula, Russia</span></li>
-        <li><span class="dot"></span><span data-i18n="hero.metaYear">3rd year</span></li>
-        <li><m3e-badge class="dot-status" size="small" aria-hidden="true"></m3e-badge><span data-i18n="hero.metaStatus">Open to internships</span></li>
-      </ul>
+      <div class="hero__meta sticker-wall">
+        <div class="sticker sticker--accent" style="--sticker-rot: -2.5deg;">
+          <m3e-icon name="terminal"></m3e-icon>
+          <span>NixOS 26.05</span>
+        </div>
+        <div class="sticker" style="--sticker-rot: 2deg;">
+          <m3e-icon name="desktop_windows"></m3e-icon>
+          <span>Wayland Native</span>
+        </div>
+        <div class="sticker sticker--secondary" style="--sticker-rot: -1.5deg;">
+          <m3e-icon name="auto_awesome"></m3e-icon>
+          <span>M3 Expressive</span>
+        </div>
+        <div class="sticker sticker--tertiary" style="--sticker-rot: 3deg;">
+          <m3e-icon name="psychology"></m3e-icon>
+          <span>Local-First AI</span>
+        </div>
+        <div class="sticker" style="--sticker-rot: -2deg;">
+          <m3e-icon name="school"></m3e-icon>
+          <span data-i18n="hero.metaYear">3rd year · TSU</span>
+        </div>
+        <div class="sticker" style="--sticker-rot: 1.5deg;">
+          <m3e-badge class="dot-status" size="small" aria-hidden="true"></m3e-badge>
+          <span data-i18n="hero.metaStatus">Open to internships</span>
+        </div>
+      </div>
     </div>
 
     <div class="hero__panel">
@@ -130,21 +151,51 @@ try {
 
   <section class="section reveal" id="skills">
     <div class="section__head">
-      <span class="section__index">02</span>
-      <h2 data-i18n="skills.title">Skills</h2>
+      <div class="section__title-wrap">
+        <span class="section__index">02</span>
+        <h2 data-i18n="skills.title">Skills</h2>
+      </div>
+      <div class="section__actions">
+        <m3e-button-group id="skillsViewToggle" variant="connected" size="small" aria-label="Skills view">
+          <m3e-button variant="tonal" toggle selected value="graph">
+            <m3e-icon slot="icon" name="hub"></m3e-icon>
+            <span data-i18n="skills.viewGraph">Graph</span>
+          </m3e-button>
+          <m3e-button variant="tonal" toggle value="cards">
+            <m3e-icon slot="icon" name="grid_view"></m3e-icon>
+            <span data-i18n="skills.viewCards">Cards</span>
+          </m3e-button>
+        </m3e-button-group>
+      </div>
     </div>
-    <div class="skills" id="skillsGrid"></div>
+    <div id="skillsGraphContainer" class="skills-graph-wrap">
+      <canvas id="skillsGraph"></canvas>
+      <div class="skills-graph-hint">
+        <m3e-icon name="touch_app"></m3e-icon>
+        <span data-i18n="skills.graphHint">Drag nodes · Hover to trace dependencies</span>
+      </div>
+    </div>
+    <div class="skills" id="skillsGrid" style="display: none;"></div>
   </section>
 
   <section class="section reveal" id="projects">
     <div class="section__head">
-      <span class="section__index">03</span>
-      <h2 data-i18n="projects.title">Projects</h2>
+      <div class="section__title-wrap">
+        <span class="section__index">03</span>
+        <h2 data-i18n="projects.title">Projects</h2>
+      </div>
+      <div class="projects__filters">
+        <m3e-button-group id="projectFilters" variant="connected" size="small" aria-label="Filter projects">
+          <m3e-button variant="tonal" toggle selected value="all">
+            <span data-i18n="projects.allFilter">All</span>
+          </m3e-button>
+          <m3e-button variant="tonal" toggle value="Go">Go</m3e-button>
+          <m3e-button variant="tonal" toggle value="Dart">Dart</m3e-button>
+          <m3e-button variant="tonal" toggle value="JavaScript">JS</m3e-button>
+        </m3e-button-group>
+      </div>
     </div>
-    <div class="projects__filters">
-      <m3e-filter-chip-set id="projectFilters" aria-label="Filter projects by language"></m3e-filter-chip-set>
-    </div>
-    <div class="projects" id="projectsGrid"></div>
+    <div class="bento" id="projectsGrid"></div>
     <div class="projects__more">
       <m3e-button variant="outlined" size="small" href="https://github.com/kyomufs?tab=repositories" target="_blank" rel="noopener">
         <m3e-icon slot="icon" name="open_in_new"></m3e-icon>
@@ -184,6 +235,6 @@ try {
 <m3e-tooltip for="themeBtn" id="themeTip">Switch theme</m3e-tooltip>
 </m3e-theme>
 
-<script src="assets/app.js"></script>
+<script type="module" src="assets/app.js"></script>
 </body>
 </html>
