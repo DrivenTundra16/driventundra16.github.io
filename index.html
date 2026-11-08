@@ -13,7 +13,7 @@
 <link rel="icon" href="https://github.com/kyomufs.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/style.css" />
 <script>
 document.documentElement.classList.add("js");
@@ -38,8 +38,11 @@ try {
       <a href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="nav__controls">
-      <button class="iconbtn" id="langBtn" type="button" aria-label="Switch language">RU</button>
-      <button class="iconbtn iconbtn--icon" id="themeBtn" type="button" aria-label="Switch theme">
+      <div class="seg" id="langGroup" role="group" aria-label="Language">
+        <button class="seg__item" type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button class="seg__item" type="button" data-lang="ru" aria-pressed="false">RU</button>
+      </div>
+      <button class="iconbtn iconbtn--icon" id="themeBtn" type="button" aria-label="Switch theme" data-tip="Switch theme">
         <svg class="icon icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
         <svg class="icon icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M2 12h2.4M19.6 12H22M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7"/></svg>
       </button>
@@ -75,9 +78,9 @@ try {
     <div class="hero__panel">
       <div class="terminal">
         <div class="terminal__bar">
-          <span class="terminal__dot terminal__dot--r"></span>
-          <span class="terminal__dot terminal__dot--y"></span>
-          <span class="terminal__dot terminal__dot--g"></span>
+          <span class="terminal__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m5 7 5 5-5 5M13 17h6"/></svg>
+          </span>
           <span class="terminal__title">zsh — ~</span>
         </div>
         <pre class="terminal__body"><span class="t-prompt">$</span> whoami
@@ -135,6 +138,9 @@ try {
       <span class="section__index">03</span>
       <h2 data-i18n="projects.title">Projects</h2>
     </div>
+    <div class="projects__filters">
+      <div class="seg seg--filters" id="projectFilters" role="group" aria-label="Filter projects by language"></div>
+    </div>
     <div class="projects" id="projectsGrid"></div>
     <div class="projects__more">
       <a class="btn btn--ghost" href="https://github.com/kyomufs?tab=repositories" target="_blank" rel="noopener" data-i18n="projects.all">All repositories on GitHub</a>
@@ -164,6 +170,10 @@ try {
   <p><span data-i18n="footer.built">Built with plain HTML, CSS and a little JavaScript.</span></p>
   <p class="footer__sig">kyomufs · <span id="year">2026</span></p>
 </footer>
+
+<button class="fab" id="toTop" type="button" aria-label="Back to top" data-tip="Back to top">
+  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>
+</button>
 
 <script src="assets/app.js"></script>
 </body>

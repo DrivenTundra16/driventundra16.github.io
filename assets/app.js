@@ -28,6 +28,11 @@ const I18N = {
     "skills.title": "Skills",
     "projects.title": "Projects",
     "projects.all": "All repositories on GitHub",
+    "projects.filterAll": "All",
+    "projects.filterLabel": "Filter projects by language",
+    "ui.langLabel": "Language",
+    "ui.themeTip": "Switch theme",
+    "ui.toTop": "Back to top",
     "contact.title": "Contact",
     "contact.text": "The fastest way to reach me is GitHub. Issues, discussions and pull requests are all welcome.",
     "footer.built": "Built with plain HTML, CSS and a little JavaScript."
@@ -59,6 +64,11 @@ const I18N = {
     "skills.title": "Навыки",
     "projects.title": "Проекты",
     "projects.all": "Все репозитории на GitHub",
+    "projects.filterAll": "Все",
+    "projects.filterLabel": "Фильтр проектов по языку",
+    "ui.langLabel": "Язык",
+    "ui.themeTip": "Сменить тему",
+    "ui.toTop": "Наверх",
     "contact.title": "Контакты",
     "contact.text": "Быстрее всего связаться через GitHub: issues, discussions и pull requests открыты.",
     "footer.built": "Сделано на чистом HTML, CSS и небольшом количестве JavaScript."
@@ -164,9 +174,17 @@ const PROJECTS = [
   }
 ];
 
+const FILTERS = [
+  { key: "all", en: "All", ru: "Все" },
+  { key: "Go", label: "Go" },
+  { key: "Dart", label: "Dart" },
+  { key: "JavaScript", label: "JS" }
+];
+
 const state = {
   lang: localStorage.getItem("kyomufs.lang") || (navigator.language.startsWith("ru") ? "ru" : "en"),
-  theme: document.documentElement.dataset.theme || "dark"
+  theme: document.documentElement.dataset.theme || "dark",
+  filter: "all"
 };
 
 const $ = (sel) => document.querySelector(sel);
@@ -185,8 +203,18 @@ function applyLanguage(lang) {
     if (dict[key] !== undefined) el.textContent = dict[key];
   });
 
-  $("#langBtn").textContent = lang === "en" ? "RU" : "EN";
+  document.querySelectorAll("[data-lang]").forEach((btn) => {
+    btn.setAttribute("aria-pressed", String(btn.dataset.lang === lang));
+  });
+  $("#langGroup").setAttribute("aria-label", dict["ui.langLabel"]);
+  $("#themeBtn").dataset.tip = dict["ui.themeTip"];
+  $("#themeBtn").setAttribute("aria-label", dict["ui.themeTip"]);
+  $("#toTop").dataset.tip = dict["ui.toTop"];
+  $("#toTop").setAttribute("aria-label", dict["ui.toTop"]);
+  $("#projectFilters").setAttribute("aria-label", dict["projects.filterLabel"]);
+
   renderSkills();
+  renderFilters();
   renderProjects();
 }
 
@@ -199,11 +227,12 @@ function applyTheme(theme) {
 
 function renderSkills() {
   const grid = $("#skillsGrid");
-  grid.innerHTML = SKILLS.map((group) => `
-    <article class="skill">
+  grid.innerHTML = SKILLS.map((group, index) => `
+    <article class="skill${index === 0 ? " skill--lead" : ""}">
       <h3 class="skill__title">
         <svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[group.icon]}</svg>
         ${group[state.lang]}
+        <span class="skill__count">${group.items.length}</span>
       </h3>
       <div class="skill__chips">
         ${group.items.map((item) => `<span class="chip">${item}</span>`).join("")}
@@ -212,10 +241,21 @@ function renderSkills() {
   `).join("");
 }
 
+function renderFilters() {
+  const group = $("#projectFilters");
+  group.innerHTML = FILTERS.map((item) => {
+    const label = item[state.lang] || item.label;
+    const pressed = state.filter === item.key;
+    return `<button class="seg__item" type="button" data-filter="${item.key}" aria-pressed="${pressed}">${label}</button>`;
+  }).join("");
+}
+
 function renderProjects() {
   const grid = $("#projectsGrid");
-  grid.innerHTML = PROJECTS.map((project) => `
-    <a class="project" href="${project.url}" target="_blank" rel="noopener">
+  const visible = state.filter === "all" ? PROJECTS : PROJECTS.filter((p) => p.lang === state.filter);
+  const featured = state.filter === "all" ? PROJECTS[0].name : null;
+  grid.innerHTML = visible.map((project) => `
+    <a class="project${project.name === featured ? " project--featured" : ""}" href="${project.url}" target="_blank" rel="noopener">
       <div class="project__top">
         <h3 class="project__name">${project.name}</h3>
         <svg class="project__arrow icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
@@ -225,7 +265,7 @@ function renderProjects() {
         <span class="project__lang"><span class="lang-dot" style="background:${project.color}"></span>${project.lang}</span>
         <span class="project__stars" data-repo="${project.name}">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.8l6.5-.9Z"/></svg>
-          <span>—</span>
+          <span class="badge"><span class="loader" aria-hidden="true"></span></span>
         </span>
       </div>
     </a>
@@ -234,17 +274,28 @@ function renderProjects() {
   hydrateStars();
 }
 
+/* Звёзды кешируются на сессию: фильтр и язык перерисовывают карточки,
+   а GitHub отдаёт анонимно 60 запросов в час на IP. */
+const STARS = new Map();
+
 async function hydrateStars() {
   await Promise.all(PROJECTS.map(async (project) => {
+    const node = document.querySelector(`[data-repo="${project.name}"] .badge`);
+    if (!node) return;
+    if (STARS.has(project.name)) {
+      node.textContent = STARS.get(project.name);
+      return;
+    }
     try {
       const res = await fetch(`https://api.github.com/repos/kyomufs/${project.name}`, { headers: { Accept: "application/vnd.github+json" } });
-      if (!res.ok) return;
+      if (!res.ok) throw new Error(String(res.status));
       const data = await res.json();
-      const node = document.querySelector(`[data-repo="${project.name}"] span`);
-      if (node) node.textContent = String(data.stargazers_count);
+      STARS.set(project.name, String(data.stargazers_count));
     } catch {
-      /* rate limit or offline — the dash stays */
+      /* rate limit or offline — show a dash instead of a spinner that never stops */
+      STARS.set(project.name, "—");
     }
+    if (node.isConnected) node.textContent = STARS.get(project.name);
   }));
 }
 
@@ -287,14 +338,40 @@ function setupNav() {
   sections.forEach((section) => spy.observe(section));
 }
 
+function setupFab() {
+  const fab = $("#toTop");
+  const onScroll = () => fab.classList.toggle("is-shown", window.scrollY > 600);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  fab.addEventListener("click", () => {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  });
+}
+
 function init() {
   applyTheme(state.theme);
   applyLanguage(state.lang);
   setupReveal();
   setupNav();
+  setupFab();
   $("#year").textContent = String(new Date().getFullYear());
 
-  $("#langBtn").addEventListener("click", () => applyLanguage(state.lang === "en" ? "ru" : "en"));
+  $("#langGroup").addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-lang]");
+    if (!btn || btn.dataset.lang === state.lang) return;
+    applyLanguage(btn.dataset.lang);
+  });
+
+  $("#projectFilters").addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-filter]");
+    if (!btn || btn.dataset.filter === state.filter) return;
+    state.filter = btn.dataset.filter;
+    renderFilters();
+    renderProjects();
+  });
+
   $("#themeBtn").addEventListener("click", () => applyTheme(state.theme === "dark" ? "light" : "dark"));
 }
 
