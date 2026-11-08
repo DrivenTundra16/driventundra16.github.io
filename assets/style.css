@@ -1,6 +1,6 @@
-/* kyomufs.github.io — Material 3 Expressive tokens + components
-   Палитра сгенерирована @material/material-color-utilities из seed #7aa2f7 (HCT),
-   движение — spring-токены, переведённые в CSS linear() по step response. */
+/* kyomufs.github.io — Material 3 Expressive.
+   Компоненты — @m3e/web (<m3e-theme> даёт токены --md-sys-*), здесь только
+   раскладка страницы, типографика и композиция. */
 
 /* ---------- shape ---------- */
 :root {
@@ -16,8 +16,9 @@
   --md-sys-shape-full: 999px;
 }
 
-/* ---------- motion ---------- */
-/* Fallback: sanctioned cubic-bezier conversion (tokens.md). */
+/* ---------- motion ----------
+   Fallback — санкционированная конверсия пружин в cubic-bezier; ниже, если браузер
+   умеет linear(), подставляются настоящие step response пружины. */
 :root {
   --dur-fast-spatial: 350ms;
   --dur-default-spatial: 500ms;
@@ -34,7 +35,6 @@
   --ease-slow-effects: cubic-bezier(0.34, 0.88, 0.34, 1);
 }
 
-/* Real springs: step response sampled to 32 stops, extrema kept as anchors. */
 @supports (transition-timing-function: linear(0, 1)) {
   :root {
     --ease-fast-spatial: linear(0, 0.0079 1.3%, 0.0298 2.6%, 0.0665 4%, 0.1178 5.5%, 0.1742 6.9%, 0.2412 8.4%, 0.5471 14.7%, 0.6871 17.8%, 0.7523 19.4%, 0.8119 21%, 0.8655 22.6%, 0.9129 24.2%, 0.9564 25.9%, 0.995 27.7%, 1.0264 29.5%, 1.0521 31.4%, 1.071 33.3%, 1.0843 35.3%, 1.0922 37.4%, 1.0948 39.7%, 1.0919 42.3%, 1.0835 45.2%, 1.0299 57.4%, 1.0082 63.9%, 0.9951 71%, 0.991 79.3%, 1 100%);
@@ -59,7 +59,6 @@
 :root {
   --ts-display-large-size: 3.5625rem;
   --ts-display-large-line: 4rem;
-  --ts-display-large-track: -0.0125rem;
 
   --ts-display-medium-size: 2.8125rem;
   --ts-display-medium-line: 3.25rem;
@@ -70,18 +69,13 @@
   --ts-headline-large-size: 2rem;
   --ts-headline-large-line: 2.5rem;
 
-  --ts-headline-medium-size: 1.75rem;
-  --ts-headline-medium-line: 2.25rem;
-
   --ts-headline-small-size: 1.5rem;
   --ts-headline-small-line: 2rem;
-
-  --ts-title-large-size: 1.375rem;
-  --ts-title-large-line: 1.75rem;
+  --ts-headline-small-track: 0rem;
 
   --ts-title-medium-size: 1rem;
   --ts-title-medium-line: 1.5rem;
-  --ts-title-medium-track: 0.0125rem;
+  --ts-title-medium-track: 0.009375rem;
 
   --ts-body-large-size: 1rem;
   --ts-body-large-line: 1.5rem;
@@ -89,7 +83,7 @@
 
   --ts-body-medium-size: 0.875rem;
   --ts-body-medium-line: 1.25rem;
-  --ts-body-medium-track: 0.0125rem;
+  --ts-body-medium-track: 0.015625rem;
 
   --ts-label-large-size: 0.875rem;
   --ts-label-large-line: 1.25rem;
@@ -98,84 +92,6 @@
   --ts-label-medium-size: 0.75rem;
   --ts-label-medium-line: 1rem;
   --ts-label-medium-track: 0.03125rem;
-}
-
-/* ---------- color: dark (default) ---------- */
-:root {
-  --md-sys-color-primary: #aec6ff;
-  --md-sys-color-on-primary: #002e6b;
-  --md-sys-color-primary-container: #0c4393;
-  --md-sys-color-on-primary-container: #d8e2ff;
-  --md-sys-color-secondary: #bfc6dc;
-  --md-sys-color-on-secondary: #293041;
-  --md-sys-color-secondary-container: #3f4759;
-  --md-sys-color-on-secondary-container: #dbe2f9;
-  --md-sys-color-tertiary: #dfbbde;
-  --md-sys-color-on-tertiary: #402843;
-  --md-sys-color-tertiary-container: #583e5a;
-  --md-sys-color-on-tertiary-container: #fcd7fb;
-  --md-sys-color-error: #ffb4ab;
-  --md-sys-color-on-error: #690005;
-  --md-sys-color-error-container: #93000a;
-  --md-sys-color-on-error-container: #ffb4ab;
-  --md-sys-color-surface-tint: #aec6ff;
-  --md-sys-color-outline: #8e9099;
-  --md-sys-color-outline-variant: #44474f;
-  --md-sys-color-inverse-surface: #e3e2e6;
-  --md-sys-color-inverse-on-surface: #303034;
-  --md-sys-color-inverse-primary: #305cac;
-  --md-sys-color-scrim: #000000;
-  --md-sys-color-shadow: #000000;
-  --md-sys-color-surface: #121316;
-  --md-sys-color-on-surface: #e3e2e6;
-  --md-sys-color-surface-dim: #121316;
-  --md-sys-color-surface-bright: #38393c;
-  --md-sys-color-surface-container-lowest: #0d0e11;
-  --md-sys-color-surface-container-low: #1b1b1f;
-  --md-sys-color-surface-container: #1f1f23;
-  --md-sys-color-surface-container-high: #292a2d;
-  --md-sys-color-surface-container-highest: #343538;
-  --md-sys-color-on-surface-variant: #c5c6d0;
-  color-scheme: dark;
-}
-
-/* ---------- color: light ---------- */
-:root[data-theme="light"] {
-  --md-sys-color-primary: #305cac;
-  --md-sys-color-on-primary: #ffffff;
-  --md-sys-color-primary-container: #d8e2ff;
-  --md-sys-color-on-primary-container: #001a43;
-  --md-sys-color-secondary: #575e71;
-  --md-sys-color-on-secondary: #ffffff;
-  --md-sys-color-secondary-container: #dbe2f9;
-  --md-sys-color-on-secondary-container: #141b2c;
-  --md-sys-color-tertiary: #715573;
-  --md-sys-color-on-tertiary: #ffffff;
-  --md-sys-color-tertiary-container: #fcd7fb;
-  --md-sys-color-on-tertiary-container: #2a132d;
-  --md-sys-color-error: #ba1a1a;
-  --md-sys-color-on-error: #ffffff;
-  --md-sys-color-error-container: #ffdad6;
-  --md-sys-color-on-error-container: #410002;
-  --md-sys-color-surface-tint: #305cac;
-  --md-sys-color-outline: #757780;
-  --md-sys-color-outline-variant: #c5c6d0;
-  --md-sys-color-inverse-surface: #303034;
-  --md-sys-color-inverse-on-surface: #f2f0f4;
-  --md-sys-color-inverse-primary: #aec6ff;
-  --md-sys-color-scrim: #000000;
-  --md-sys-color-shadow: #000000;
-  --md-sys-color-surface: #faf8fd;
-  --md-sys-color-on-surface: #1b1b1f;
-  --md-sys-color-surface-dim: #dbd9dd;
-  --md-sys-color-surface-bright: #faf8fd;
-  --md-sys-color-surface-container-lowest: #ffffff;
-  --md-sys-color-surface-container-low: #f5f3f7;
-  --md-sys-color-surface-container: #efedf1;
-  --md-sys-color-surface-container-high: #e9e7ec;
-  --md-sys-color-surface-container-highest: #e3e2e6;
-  --md-sys-color-on-surface-variant: #44474f;
-  color-scheme: light;
 }
 
 /* ---------- elevation + layout ---------- */
@@ -192,6 +108,9 @@
 /* ---------- reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
+/* подложка до апгрейда <m3e-theme>: неизвестный элемент не красит body */
+html[data-theme="dark"] { background: #0d0e12; color-scheme: dark; }
+html[data-theme="light"] { background: #faf9fe; color-scheme: light; }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
@@ -199,27 +118,31 @@ html { -webkit-text-size-adjust: 100%; }
 html { scroll-padding-top: 96px; }
 body {
   margin: 0;
-  min-height: 100vh;
   font-family: var(--font);
   font-size: var(--ts-body-large-size);
   line-height: var(--ts-body-large-line);
   letter-spacing: var(--ts-body-large-track);
-  color: var(--md-sys-color-on-surface);
-  background: var(--md-sys-color-surface);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
-  transition:
-    background-color var(--motion-default-effects),
-    color var(--motion-default-effects);
+}
+/* тема задаёт токены и красит поверхность */
+m3e-theme {
+  display: block;
+  min-height: 100dvh;
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  transition: background-color var(--motion-default-effects), color var(--motion-default-effects);
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 h1, h2, h3, p, ul { margin: 0; }
 ul { padding: 0; list-style: none; }
-button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 ::selection { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
 :focus-visible { outline: 3px solid var(--md-sys-color-primary); outline-offset: 2px; border-radius: var(--md-sys-shape-xs); }
+
+/* иконки приходят из Material Symbols; размер задаёт сам m3e-icon */
+m3e-icon { --m3e-icon-size: 20px; }
 
 /* ---------- top app bar ---------- */
 .nav {
@@ -227,7 +150,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   top: 0;
   z-index: 50;
   padding: 12px var(--gutter) 0;
-  background: transparent;
 }
 /* плавающая панель: контейнер surface + CornerFull, тень появляется при скролле */
 .nav__inner {
@@ -242,8 +164,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background: var(--md-sys-color-surface-container);
   transition:
     border-color var(--motion-default-effects),
-    box-shadow var(--motion-default-effects),
-    background-color var(--motion-default-effects);
+    box-shadow var(--motion-default-effects);
 }
 .nav.is-stuck .nav__inner {
   border-color: var(--md-sys-color-outline-variant);
@@ -261,7 +182,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-family: var(--mono);
   font-size: var(--ts-label-large-size);
   font-weight: 700;
-  transition: border-radius var(--motion-fast-spatial), background-color var(--motion-fast-effects);
+  transition: border-radius var(--motion-fast-spatial);
 }
 .brand:hover .brand__mark { border-radius: var(--md-sys-shape-full); }
 .brand__text {
@@ -296,93 +217,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-weight: 700;
 }
 .nav__controls { display: flex; align-items: center; gap: 4px; margin-left: 8px; }
-
-/* ---------- connected button group (заменяет segmented) ----------
-   40dp, между сегментами 2dp, внешний угол full, внутренний — 8dp (M).
-   Выбор морфит угол 8 → full, нажатие — в 4dp: форма, поэтому spatial-spring. */
-.seg { display: inline-flex; align-items: center; gap: 2px; flex: 0 0 auto; }
-.seg__item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  height: 40px;
-  padding: 0 14px;
-  border: 1px solid var(--md-sys-color-outline);
-  border-radius: var(--md-sys-shape-sm);
-  font-size: var(--ts-label-large-size);
-  line-height: var(--ts-label-large-line);
-  font-weight: 500;
-  letter-spacing: var(--ts-label-large-track);
-  color: var(--md-sys-color-on-surface-variant);
-  transition:
-    border-radius var(--motion-fast-spatial),
-    background-color var(--motion-fast-effects),
-    border-color var(--motion-fast-effects),
-    color var(--motion-fast-effects),
-    transform var(--motion-fast-spatial);
-}
-.seg__item:hover {
-  color: var(--md-sys-color-on-surface);
-  background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
-}
-.seg__item[aria-pressed="true"] {
-  border-color: transparent;
-  border-radius: var(--md-sys-shape-full);
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  font-weight: 700;
-}
-.seg__item[aria-pressed="true"]:hover {
-  background: color-mix(in srgb, var(--md-sys-color-on-secondary-container) 8%, var(--md-sys-color-secondary-container));
-}
-.seg__item:active {
-  border-radius: var(--md-sys-shape-xs);
-  transform: scale(0.95);
-}
-.seg--filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
-.seg--filters::-webkit-scrollbar { display: none; }
-
-/* icon button: full → small corner on press (IconButton tokens) */
-.iconbtn {
-  display: grid;
-  place-items: center;
-  min-width: 40px;
-  height: 40px;
-  padding: 0 10px;
-  border-radius: var(--md-sys-shape-full);
-  font-family: var(--mono);
-  font-size: var(--ts-label-large-size);
-  font-weight: 500;
-  color: var(--md-sys-color-on-surface-variant);
-  background: transparent;
-  transition:
-    background-color var(--motion-fast-effects),
-    color var(--motion-fast-effects),
-    border-radius var(--motion-fast-spatial),
-    transform var(--motion-fast-spatial);
-}
-.iconbtn:hover {
-  color: var(--md-sys-color-on-surface);
-  background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
-}
-.iconbtn:active {
-  border-radius: var(--md-sys-shape-sm);
-  transform: scale(0.94);
-}
-.iconbtn--icon { padding: 0; width: 40px; }
-.icon {
-  width: 20px;
-  height: 20px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.icon--sun { display: none; }
-:root[data-theme="light"] .icon--moon { display: none; }
-:root[data-theme="light"] .icon--sun { display: block; }
+#langGroup { flex: 0 0 auto; }
 
 /* ---------- layout ---------- */
 main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
@@ -429,14 +264,14 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   gap: 56px;
   align-items: center;
   padding: 80px 0 32px;
-  min-height: calc(100vh - 64px);
+  min-height: calc(100dvh - 64px);
 }
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   height: 32px;
-  padding: 0 14px 0 10px;
+  padding: 0 14px;
   border-radius: var(--md-sys-shape-full);
   background: var(--md-sys-color-tertiary-container);
   color: var(--md-sys-color-on-tertiary-container);
@@ -474,44 +309,6 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
 
-/* buttons: 48dp в hero, угол 20 на покое → full на hover (форма, spatial spring) */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  height: 48px;
-  padding: 0 28px;
-  border-radius: var(--md-sys-shape-lg-increased);
-  font-size: var(--ts-label-large-size);
-  line-height: var(--ts-label-large-line);
-  font-weight: 500;
-  letter-spacing: var(--ts-label-large-track);
-  transition:
-    background-color var(--motion-fast-effects),
-    box-shadow var(--motion-fast-effects),
-    color var(--motion-fast-effects),
-    border-radius var(--motion-fast-spatial),
-    transform var(--motion-fast-spatial);
-}
-.btn:hover { border-radius: var(--md-sys-shape-full); }
-.btn:active { transform: scale(0.96); }
-.btn--primary {
-  background: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
-}
-.btn--primary:hover {
-  background: color-mix(in srgb, var(--md-sys-color-on-primary) 8%, var(--md-sys-color-primary));
-  box-shadow: var(--elev-1);
-}
-.btn--ghost {
-  border: 1px solid var(--md-sys-color-outline);
-  color: var(--md-sys-color-on-surface);
-}
-.btn--ghost:hover {
-  background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
-}
-.btn--ghost .icon { width: 18px; height: 18px; fill: currentColor; stroke: none; }
 .hero__meta {
   display: flex;
   flex-wrap: wrap;
@@ -533,29 +330,24 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   background: var(--md-sys-color-surface-container);
 }
 .dot { width: 6px; height: 6px; border-radius: var(--md-sys-shape-full); background: var(--md-sys-color-primary); }
-.dot--pulse { background: var(--md-sys-color-tertiary); box-shadow: 0 0 0 0 currentColor; animation: pulse 2.4s var(--motion-default-effects) infinite; }
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--md-sys-color-tertiary) 55%, transparent); }
-  70% { box-shadow: 0 0 0 8px transparent; }
-  100% { box-shadow: 0 0 0 0 transparent; }
+/* статус — настоящий бейдж M3, а не пульсирующая точка */
+.dot-status {
+  --m3e-badge-container-color: var(--md-sys-color-tertiary);
+  --m3e-badge-small-size: 8px;
+  flex: 0 0 auto;
 }
 
 .hero__panel { position: relative; display: flex; flex-direction: column; gap: 12px; }
 .hero__panel::before {
   content: "";
   position: absolute;
-  inset: -44px -36px -36px -30px;
+  inset: -40px -32px -32px -28px;
   z-index: -1;
+  border-radius: var(--md-sys-shape-xxl);
   background: var(--md-sys-color-primary-container);
-  clip-path: var(--shape-cookie-9);
-  opacity: 0.55;
+  opacity: 0.4;
 }
-.terminal {
-  border-radius: var(--md-sys-shape-xl);
-  background: var(--md-sys-color-surface-container-lowest);
-  overflow: hidden;
-  box-shadow: var(--elev-3);
-}
+.terminal { --m3e-card-padding: 0px; overflow: hidden; }
 .terminal__bar {
   display: flex;
   align-items: center;
@@ -636,18 +428,13 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 }
 .about__text p + p { margin-top: 16px; }
 .about__card {
-  padding: 24px;
-  border-radius: var(--md-sys-shape-xl);
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  --m3e-card-padding: 24px;
+  --m3e-card-container-color: var(--md-sys-color-secondary-container);
+  --m3e-card-text-color: var(--md-sys-color-on-secondary-container);
+  --m3e-card-shape: var(--md-sys-shape-xl);
 }
-.about__card .about__card-sub,
-.about__card .about__card-year { color: inherit; opacity: 0.8; }
 .about__card-label {
-  align-self: flex-start;
+  display: inline-block;
   padding: 2px 8px;
   margin-bottom: 8px;
   border-radius: var(--md-sys-shape-xs);
@@ -668,46 +455,27 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   font-size: var(--ts-body-medium-size);
   line-height: var(--ts-body-medium-line);
   letter-spacing: var(--ts-body-medium-track);
-  color: var(--md-sys-color-on-surface-variant);
+  opacity: 0.82;
 }
 .about__card-year {
   margin-top: 12px;
   font-size: var(--ts-label-medium-size);
   line-height: var(--ts-label-medium-line);
   letter-spacing: var(--ts-label-medium-track);
-  color: var(--md-sys-color-on-surface-variant);
+  opacity: 0.82;
 }
 
 /* ---------- skills ---------- */
 .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(248px, 100%), 1fr)); gap: 12px; }
 .skill {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  border-radius: var(--md-sys-shape-lg-increased);
-  /* filled card: surface container highest, без тени (M3 cards) */
-  background: var(--md-sys-color-surface-container-highest);
-  transition: background-color var(--motion-fast-effects), translate var(--motion-fast-spatial);
+  --m3e-card-padding: 20px;
+  --m3e-card-container-color: var(--md-sys-color-surface-container-highest);
+  --m3e-card-shape: var(--md-sys-shape-lg-increased);
 }
-.skill:hover { background: var(--md-sys-color-surface-container); }
-/* главная группа — акцентная карточка, остальные держат тон поверхности */
+/* первая группа — акцентная карточка: цвет, а не растяжка, иначе сетка 3x3 рвётся */
 .skill--lead {
-  background: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
-}
-@media (min-width: 700px) {
-  .skill--lead { grid-column: span 2; }
-}
-.skill--lead:hover { background: var(--md-sys-color-primary-container); }
-.skill--lead .skill__title svg { stroke: var(--md-sys-color-on-primary-container); }
-.skill--lead .chip {
-  border-color: color-mix(in srgb, var(--md-sys-color-on-primary-container) 35%, transparent);
-  color: var(--md-sys-color-on-primary-container);
-  background: transparent;
-}
-.skill--lead:hover .chip {
-  background: color-mix(in srgb, var(--md-sys-color-on-primary-container) 8%, transparent);
-  border-color: var(--md-sys-color-on-primary-container);
+  --m3e-card-container-color: var(--md-sys-color-primary-container);
+  --m3e-card-text-color: var(--md-sys-color-on-primary-container);
 }
 .skill__title {
   display: flex;
@@ -719,54 +487,48 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   letter-spacing: var(--ts-title-medium-track);
   margin-bottom: 14px;
 }
-.skill__title svg {
-  box-sizing: content-box;
-  width: 18px;
-  height: 18px;
-  padding: 7px;
+.skill__badge {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
   border-radius: var(--md-sys-shape-sm);
   background: var(--md-sys-color-surface-container-low);
-  stroke: var(--md-sys-color-primary);
-  fill: none;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  color: var(--md-sys-color-primary);
+}
+.skill--lead .skill__badge {
+  background: color-mix(in srgb, var(--md-sys-color-on-primary-container) 12%, transparent);
+  color: var(--md-sys-color-on-primary-container);
 }
 .skill__count {
   margin-left: auto;
   font-family: var(--mono);
   font-size: var(--ts-label-medium-size);
   font-weight: 500;
-  color: var(--md-sys-color-on-surface-variant);
+  opacity: 0.66;
 }
-.skill--lead .skill__count { color: var(--md-sys-color-on-primary-container); opacity: 0.7; }
 .skill__chips { display: flex; flex-wrap: wrap; gap: 6px; }
-/* chip: 32dp, угол 12; hover — full, press — 8dp (Chips tokens) */
+/* тег, не чип-действие: ассистивные чипы здесь были бы ложным affordance */
 .chip {
   display: inline-flex;
   align-items: center;
   height: 32px;
   padding: 0 12px;
   border: 1px solid var(--md-sys-color-outline);
-  border-radius: var(--md-sys-shape-md);
+  border-radius: var(--md-sys-shape-sm);
   font-size: var(--ts-label-medium-size);
   line-height: var(--ts-label-medium-line);
   font-weight: 500;
   letter-spacing: var(--ts-label-medium-track);
   color: var(--md-sys-color-on-surface-variant);
-  background: var(--md-sys-color-surface);
-  transition:
-    border-radius var(--motion-fast-spatial),
-    background-color var(--motion-fast-effects),
-    border-color var(--motion-fast-effects);
+  background: transparent;
 }
-.skill:hover .chip {
-  border-radius: var(--md-sys-shape-full);
-  border-color: var(--md-sys-color-outline);
-  background: var(--md-sys-color-surface-container-low);
+.skill--lead .chip {
+  border-color: color-mix(in srgb, var(--md-sys-color-on-primary-container) 45%, transparent);
+  color: var(--md-sys-color-on-primary-container);
 }
 
-/* ---------- projects (outlined cards) ---------- */
+/* ---------- projects ---------- */
 .projects__filters {
   display: flex;
   align-items: center;
@@ -774,51 +536,23 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   margin-bottom: 16px;
 }
 .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 12px; }
+.project-link { display: block; height: 100%; border-radius: var(--md-sys-shape-lg-increased); }
+.project-link:focus-visible { outline-offset: 3px; }
+/* грид-элемент — ссылка, карточка внутри неё */
+.project-link:has(.project--featured) { grid-column: 1 / -1; }
 .project {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 16px;
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--md-sys-shape-lg-increased);
-  background: var(--md-sys-color-surface-container);
-  transition:
-    background-color var(--motion-fast-effects),
-    box-shadow var(--motion-fast-effects),
-    border-color var(--motion-fast-effects),
-    transform var(--motion-fast-spatial);
+  --m3e-card-padding: 16px;
+  --m3e-card-shape: var(--md-sys-shape-lg-increased);
+  height: 100%;
 }
 /* featured: первая карточка занимает всю строку и говорит громче остальных */
 .project--featured {
-  grid-column: 1 / -1;
-  padding: 28px;
-  border-radius: var(--md-sys-shape-xl);
-  background: var(--md-sys-color-secondary-container);
-  border-color: transparent;
-  color: var(--md-sys-color-on-secondary-container);
+  --m3e-card-padding: 28px;
+  --m3e-card-shape: var(--md-sys-shape-xl);
+  --m3e-card-container-color: var(--md-sys-color-secondary-container);
+  --m3e-card-text-color: var(--md-sys-color-on-secondary-container);
 }
-.project--featured:hover {
-  background: color-mix(in srgb, var(--md-sys-color-on-secondary-container) 6%, var(--md-sys-color-secondary-container));
-  border-color: transparent;
-  box-shadow: var(--elev-1);
-}
-.project--featured .project__name {
-  font-size: var(--ts-headline-small-size);
-  line-height: var(--ts-headline-small-line);
-  letter-spacing: var(--ts-headline-small-track);
-  font-weight: 500;
-}
-.project--featured .project__desc { color: inherit; opacity: 0.85; max-width: 62ch; }
-.project--featured .project__lang,
-.project--featured .project__arrow { color: inherit; }
-.project--featured .project__arrow { color: var(--md-sys-color-on-secondary-container); }
-.project:hover {
-  background: var(--md-sys-color-surface-container-high);
-  border-color: var(--md-sys-color-outline);
-  box-shadow: var(--elev-1);
-  transform: translateY(-2px);
-}
-.project:active { transform: translateY(-2px) scale(0.99); }
+.project__inner { display: flex; flex-direction: column; gap: 10px; height: 100%; }
 .project__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .project__name {
   font-size: var(--ts-title-medium-size);
@@ -826,16 +560,21 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   font-weight: 500;
   letter-spacing: var(--ts-title-medium-track);
 }
+.project--featured .project__name {
+  font-size: var(--ts-headline-small-size);
+  line-height: var(--ts-headline-small-line);
+  letter-spacing: var(--ts-headline-small-track);
+}
 .project__arrow {
-  width: 18px;
-  height: 18px;
+  --m3e-icon-size: 18px;
   color: var(--md-sys-color-on-surface-variant);
-  transition: color var(--motion-fast-effects), transform var(--motion-fast-spatial);
+  transition: color var(--motion-fast-effects), translate var(--motion-fast-spatial);
 }
-.project:hover .project__arrow {
+.project-link:hover .project__arrow {
   color: var(--md-sys-color-primary);
-  transform: translate(2px, -2px);
+  translate: 2px -2px;
 }
+.project--featured .project__arrow { color: inherit; }
 .project__desc {
   flex: 1;
   font-size: var(--ts-body-medium-size);
@@ -843,6 +582,7 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   letter-spacing: var(--ts-body-medium-track);
   color: var(--md-sys-color-on-surface-variant);
 }
+.project--featured .project__desc { color: inherit; opacity: 0.86; max-width: 62ch; }
 .project__foot {
   display: flex;
   align-items: center;
@@ -853,26 +593,11 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   letter-spacing: var(--ts-label-medium-track);
   color: var(--md-sys-color-on-surface-variant);
 }
+.project--featured .project__foot { color: inherit; opacity: 0.8; }
 .project__lang { display: inline-flex; align-items: center; gap: 6px; }
 .lang-dot { width: 8px; height: 8px; border-radius: var(--md-sys-shape-full); }
 .project__stars { display: inline-flex; align-items: center; gap: 6px; }
-.project__stars svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; }
-/* badge: 16dp, corner full (Badge tokens); звёзды приезжают поверх скелетона */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 16px;
-  height: 16px;
-  padding: 0 5px;
-  border-radius: var(--md-sys-shape-full);
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  font-family: var(--mono);
-  font-size: 11px;
-  line-height: 1;
-  font-weight: 500;
-}
+.project__stars m3e-icon { --m3e-icon-size: 14px; }
 .projects__more { margin-top: 20px; display: flex; justify-content: center; }
 
 /* ---------- contact (primary container, hero moment #2) ---------- */
@@ -895,39 +620,13 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   font-weight: 500;
 }
 .contact__links { display: flex; flex-wrap: wrap; gap: 8px; }
-.contact__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 40px;
-  padding: 0 20px;
-  border-radius: var(--md-sys-shape-full);
-  background: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
-  font-size: var(--ts-label-large-size);
-  line-height: var(--ts-label-large-line);
-  font-weight: 500;
-  letter-spacing: var(--ts-label-large-track);
-  transition: background-color var(--motion-fast-effects), transform var(--motion-fast-spatial);
-}
-.contact__link:hover { background: color-mix(in srgb, var(--md-sys-color-on-primary) 10%, var(--md-sys-color-primary)); }
-.contact__link:active { transform: scale(0.96); }
-.contact__link .icon { width: 18px; height: 18px; fill: currentColor; stroke: none; }
 
-/* ---------- FAB (56dp, CornerLarge → increased on hover, full on press) ---------- */
-.fab {
+/* ---------- FAB ---------- */
+#toTop {
   position: fixed;
   right: max(var(--gutter), env(safe-area-inset-right, 0px));
   bottom: max(24px, env(safe-area-inset-bottom, 0px));
   z-index: 40;
-  display: grid;
-  place-items: center;
-  width: 56px;
-  height: 56px;
-  border-radius: var(--md-sys-shape-lg);
-  background: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
-  box-shadow: var(--elev-2);
   opacity: 0;
   visibility: hidden;
   translate: 0 16px;
@@ -935,118 +634,15 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   transition:
     opacity var(--motion-default-effects),
     visibility 0s linear var(--dur-default-effects),
-    translate var(--motion-default-spatial),
-    border-radius var(--motion-default-spatial),
-    box-shadow var(--motion-default-effects),
-    transform var(--motion-fast-spatial);
+    translate var(--motion-default-spatial);
 }
-.fab.is-shown {
+#toTop.is-shown {
   opacity: 1;
   visibility: visible;
   translate: 0 0;
   pointer-events: auto;
-  transition-delay: 0s, 0s, 0s, 0s, 0s, 0s;
+  transition-delay: 0s, 0s, 0s;
 }
-.fab:hover {
-  border-radius: var(--md-sys-shape-lg-increased);
-  box-shadow: var(--elev-3);
-}
-.fab:active {
-  border-radius: var(--md-sys-shape-full);
-  transform: scale(0.92);
-}
-.fab svg { width: 24px; height: 24px; }
-
-/* ---------- state layer ----------
-   У кнопок hover уже подмешивает 8% в фон; карточкам и FAB нужен отдельный
-   слой, чтобы состояние читалось поверх тональной поверхности. */
-/* FAB уже fixed, своего containing block не меняем — только проект нуждается в relative */
-.project { position: relative; }
-.project::before,
-.fab::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: currentColor;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 150ms linear;
-}
-.project:hover::before,
-.fab:hover::before { opacity: 0.08; }
-.project:focus-visible::before,
-.project:active::before,
-.fab:focus-visible::before,
-.fab:active::before { opacity: 0.10; }
-
-/* ---------- tooltip (plain, CornerExtraSmall) ---------- */
-/* FAB уже позиционирован сам, absolute ::after цепляется к нему без этого правила */
-.iconbtn[data-tip] { position: relative; }
-[data-tip]::after {
-  content: attr(data-tip);
-  position: absolute;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  z-index: 60;
-  padding: 4px 8px;
-  border-radius: var(--md-sys-shape-xs);
-  background: var(--md-sys-color-inverse-surface);
-  color: var(--md-sys-color-inverse-on-surface);
-  font-family: var(--font);
-  font-size: var(--ts-label-medium-size);
-  line-height: var(--ts-label-medium-line);
-  font-weight: 500;
-  letter-spacing: var(--ts-label-medium-track);
-  white-space: nowrap;
-  opacity: 0;
-  translate: -50% 4px;
-  pointer-events: none;
-  transition: opacity var(--motion-fast-effects), translate var(--motion-fast-spatial);
-}
-[data-tip]:hover::after,
-[data-tip]:focus-visible::after { opacity: 1; translate: -50% 0; }
-
-/* ---------- expressive loading indicator ----------
-   Семь форм библиотеки Material, по 24 точки: одинаковое число вершин — CSS
-   интерполирует polygon линейно, поэтому морф плавный, а не ступенчатый. */
-:root {
-  --shape-soft-burst: polygon(50% 0%, 59.3% 15.1%, 70.7% 14.1%, 85.4% 14.6%, 81.3% 31.9%, 90.1% 39.3%, 100% 50%, 84.9% 59.3%, 85.9% 70.7%, 85.4% 85.4%, 68.1% 81.3%, 60.7% 90.1%, 50% 100%, 40.7% 84.9%, 29.3% 85.9%, 14.6% 85.4%, 18.7% 68.1%, 9.9% 60.7%, 0% 50%, 15.1% 40.7%, 14.1% 29.3%, 14.6% 14.6%, 31.9% 18.7%, 39.3% 9.9%);
-  --shape-cookie-9: polygon(50% 2.3%, 62.6% 3%, 73.5% 9.3%, 84.4% 15.6%, 91.3% 26.1%, 95.6% 37.8%, 100% 50%, 95.6% 62.2%, 91.3% 73.9%, 84.4% 84.4%, 73.5% 90.7%, 62.6% 97%, 50% 97.7%, 37.8% 95.6%, 25% 93.3%, 16.6% 83.4%, 8.7% 73.9%, 3% 62.6%, 3% 50%, 3% 37.4%, 8.7% 26.1%, 16.6% 16.6%, 25% 6.7%, 37.8% 4.4%);
-  --shape-pentagon: polygon(50% 7.5%, 62.5% 3.4%, 72.1% 11.7%, 79% 21%, 85.2% 29.7%, 91.9% 38.8%, 100% 50%, 91.9% 61.2%, 85.2% 70.3%, 79% 79%, 72.1% 88.3%, 62.5% 96.6%, 50% 92.5%, 39.5% 89.1%, 29.3% 85.8%, 17.9% 82.1%, 9.5% 73.4%, 9.5% 60.8%, 9.5% 50%, 9.5% 39.2%, 9.5% 26.6%, 17.9% 17.9%, 29.3% 14.2%, 39.5% 10.9%);
-  --shape-pill: polygon(50% 22%, 69% 22.7%, 80.5% 24.7%, 89% 28.1%, 95.1% 32.9%, 98.8% 39.3%, 100% 50%, 98.8% 60.7%, 95.1% 67.1%, 89% 71.9%, 80.5% 75.3%, 69% 77.3%, 50% 78%, 31% 77.3%, 19.5% 75.3%, 11% 71.9%, 4.9% 67.1%, 1.2% 60.7%, 0% 50%, 1.2% 39.3%, 4.9% 32.9%, 11% 28.1%, 19.5% 24.7%, 31% 22.7%);
-  --shape-sunny: polygon(50% 0%, 59.4% 15%, 75% 6.7%, 75.6% 24.4%, 93.3% 25%, 85% 40.6%, 100% 50%, 85% 59.4%, 93.3% 75%, 75.6% 75.6%, 75% 93.3%, 59.4% 85%, 50% 100%, 40.6% 85%, 25% 93.3%, 24.4% 75.6%, 6.7% 75%, 15% 59.4%, 0% 50%, 15% 40.6%, 6.7% 25%, 24.4% 24.4%, 25% 6.7%, 40.6% 15%);
-  --shape-cookie-4: polygon(50% 7.1%, 70.2% 8%, 79.2% 10.4%, 85.4% 14.6%, 89.6% 20.8%, 92% 29.8%, 92.9% 50%, 92% 70.2%, 89.6% 79.2%, 85.4% 85.4%, 79.2% 89.6%, 70.2% 92%, 50% 92.9%, 29.8% 92%, 20.8% 89.6%, 14.6% 85.4%, 10.4% 79.2%, 8% 70.2%, 7.1% 50%, 8% 29.8%, 10.4% 20.8%, 14.6% 14.6%, 20.8% 10.4%, 29.8% 8%);
-  --shape-oval: polygon(50% 17%, 62.9% 18.1%, 75% 21.4%, 85.4% 26.7%, 93.3% 33.5%, 98.3% 41.5%, 100% 50%, 98.3% 58.5%, 93.3% 66.5%, 85.4% 73.3%, 75% 78.6%, 62.9% 81.9%, 50% 83%, 37.1% 81.9%, 25% 78.6%, 14.6% 73.3%, 6.7% 66.5%, 1.7% 58.5%, 0% 50%, 1.7% 41.5%, 6.7% 33.5%, 14.6% 26.7%, 25% 21.4%, 37.1% 18.1%);
-}
-.loader {
-  display: inline-grid;
-  place-items: center;
-  width: 16px;
-  height: 16px;
-  color: currentColor;
-}
-.loader::before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: currentColor;
-  clip-path: var(--shape-soft-burst);
-  animation:
-    loader-shape 4550ms linear infinite,
-    loader-spin 4666ms linear infinite;
-}
-@keyframes loader-shape {
-  0% { clip-path: var(--shape-soft-burst); }
-  14.29% { clip-path: var(--shape-cookie-9); }
-  28.57% { clip-path: var(--shape-pentagon); }
-  42.86% { clip-path: var(--shape-pill); }
-  57.14% { clip-path: var(--shape-sunny); }
-  71.43% { clip-path: var(--shape-cookie-4); }
-  85.71% { clip-path: var(--shape-oval); }
-  100% { clip-path: var(--shape-soft-burst); }
-}
-@keyframes loader-spin { to { rotate: 360deg; } }
 
 /* ---------- footer ---------- */
 .footer {
@@ -1113,7 +709,6 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   .hero__title { font-size: var(--ts-display-small-size); line-height: var(--ts-display-small-line); }
   .hero__lead { font-size: var(--ts-body-large-size); }
   .nav__links a { padding: 0 8px; font-size: var(--ts-label-medium-size); }
-  .seg__item { padding: 0 12px; }
   .contact { padding: 20px; border-radius: var(--md-sys-shape-lg); }
   .footer { margin-top: 56px; }
 }
@@ -1129,8 +724,4 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
     transition-duration: 0.001ms !important;
   }
   .js .reveal { opacity: 1; translate: none; }
-  .btn:active, .iconbtn:active, .project:active, .contact__link:active,
-  .seg__item:active, .fab:active { transform: none; }
-  /* индикатор — одна статичная форма, без морфа и вращения */
-  .loader::before { animation: none; clip-path: var(--shape-pill); }
 }

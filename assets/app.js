@@ -1,4 +1,5 @@
-/* kyomufs.github.io — bilingual single page, no build step */
+/* kyomufs.github.io — bilingual single page.
+   Разметку компонентов даёт @m3e/web, здесь только данные и состояния. */
 
 const I18N = {
   en: {
@@ -28,7 +29,6 @@ const I18N = {
     "skills.title": "Skills",
     "projects.title": "Projects",
     "projects.all": "All repositories on GitHub",
-    "projects.filterAll": "All",
     "projects.filterLabel": "Filter projects by language",
     "ui.langLabel": "Language",
     "ui.themeTip": "Switch theme",
@@ -64,7 +64,6 @@ const I18N = {
     "skills.title": "Навыки",
     "projects.title": "Проекты",
     "projects.all": "Все репозитории на GitHub",
-    "projects.filterAll": "Все",
     "projects.filterLabel": "Фильтр проектов по языку",
     "ui.langLabel": "Язык",
     "ui.themeTip": "Сменить тему",
@@ -75,15 +74,6 @@ const I18N = {
   }
 };
 
-const ICONS = {
-  code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
-  server: '<rect x="2.5" y="3.5" width="19" height="7" rx="2"/><rect x="2.5" y="13.5" width="19" height="7" rx="2"/><line x1="6.5" y1="7" x2="6.6" y2="7"/><line x1="6.5" y1="17" x2="6.6" y2="17"/>',
-  layers: '<polygon points="12 2.5 22 8 12 13.5 2 8"/><polyline points="2 13 12 18.5 22 13"/><polyline points="2 17.5 12 23 22 17.5"/>',
-  database: '<ellipse cx="12" cy="5.5" rx="8" ry="3.2"/><path d="M4 5.5v6c0 1.8 3.6 3.2 8 3.2s8-1.4 8-3.2v-6"/><path d="M4 11.5v6c0 1.8 3.6 3.2 8 3.2s8-1.4 8-3.2v-6"/>',
-  network: '<circle cx="12" cy="5" r="2.6"/><circle cx="5" cy="19" r="2.6"/><circle cx="19" cy="19" r="2.6"/><path d="M12 7.6v4.2M10.2 13.4 6.4 16.8M13.8 13.4l3.8 3.4"/>',
-  spark: '<path d="M12 3v3.4M12 17.6V21M4.9 4.9l2.4 2.4M16.7 16.7l2.4 2.4M3 12h3.4M17.6 12H21M4.9 19.1l2.4-2.4M16.7 7.3l2.4-2.4"/><circle cx="12" cy="12" r="3.1"/>'
-};
-
 const SKILLS = [
   {
     icon: "code",
@@ -92,7 +82,7 @@ const SKILLS = [
     items: ["C", "C++", "ASM", "Go", "TypeScript", "JavaScript", "Python", "Bash", "R", "Dart", "Kotlin"]
   },
   {
-    icon: "server",
+    icon: "dns",
     en: "Systems & infrastructure",
     ru: "Системы и инфраструктура",
     items: ["NixOS", "Linux", "Docker", "Caddy", "Gitea", "Git", "GitHub"]
@@ -110,13 +100,13 @@ const SKILLS = [
     items: ["PostgreSQL", "MySQL", "SQLite", "SQLAlchemy"]
   },
   {
-    icon: "network",
+    icon: "hub",
     en: "Networks",
     ru: "Сети",
     items: ["KeeneticOS", "RouterOS", "OpenWrt", "VLAN", "DHCP/DNS"]
   },
   {
-    icon: "spark",
+    icon: "auto_awesome",
     en: "AI tooling",
     ru: "AI-инструменты",
     items: ["Copilot", "Hermes", "OpenCode", "Crush", "DeepSeek Harness", "LoRA"]
@@ -188,6 +178,7 @@ const state = {
 };
 
 const $ = (sel) => document.querySelector(sel);
+const themeEl = $("#theme");
 
 function applyLanguage(lang) {
   state.lang = lang;
@@ -203,14 +194,19 @@ function applyLanguage(lang) {
     if (dict[key] !== undefined) el.textContent = dict[key];
   });
 
-  document.querySelectorAll("[data-lang]").forEach((btn) => {
-    btn.setAttribute("aria-pressed", String(btn.dataset.lang === lang));
+  const seg = $("#langGroup");
+  seg.setAttribute("aria-label", dict["ui.langLabel"]);
+  seg.querySelectorAll("m3e-button-segment").forEach((btn) => {
+    btn.selected = btn.value === lang;
   });
-  $("#langGroup").setAttribute("aria-label", dict["ui.langLabel"]);
-  $("#themeBtn").dataset.tip = dict["ui.themeTip"];
-  $("#themeBtn").setAttribute("aria-label", dict["ui.themeTip"]);
-  $("#toTop").dataset.tip = dict["ui.toTop"];
-  $("#toTop").setAttribute("aria-label", dict["ui.toTop"]);
+
+  const themeBtn = $("#themeBtn");
+  themeBtn.setAttribute("aria-label", dict["ui.themeTip"]);
+  $("#themeTip").textContent = dict["ui.themeTip"];
+
+  const toTop = $("#toTop");
+  toTop.setAttribute("aria-label", dict["ui.toTop"]);
+  $("#toTopTip").textContent = dict["ui.toTop"];
   $("#projectFilters").setAttribute("aria-label", dict["projects.filterLabel"]);
 
   renderSkills();
@@ -222,31 +218,37 @@ function applyTheme(theme) {
   state.theme = theme;
   localStorage.setItem("kyomufs.theme", theme);
   document.documentElement.dataset.theme = theme;
-  document.querySelector('meta[name="theme-color"]').setAttribute("content", theme === "dark" ? "#121316" : "#faf8fd");
+  themeEl.scheme = theme;
+  document.querySelector('meta[name="theme-color"]').setAttribute("content", theme === "dark" ? "#0d0e12" : "#faf9fe");
+
+  const icon = $("#themeBtn m3e-icon");
+  if (icon) icon.name = theme === "dark" ? "dark_mode" : "light_mode";
 }
 
 function renderSkills() {
   const grid = $("#skillsGrid");
   grid.innerHTML = SKILLS.map((group, index) => `
-    <article class="skill${index === 0 ? " skill--lead" : ""}">
-      <h3 class="skill__title">
-        <svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[group.icon]}</svg>
-        ${group[state.lang]}
-        <span class="skill__count">${group.items.length}</span>
-      </h3>
-      <div class="skill__chips">
-        ${group.items.map((item) => `<span class="chip">${item}</span>`).join("")}
+    <m3e-card class="skill${index === 0 ? " skill--lead" : ""}" variant="filled">
+      <div slot="content">
+        <h3 class="skill__title">
+          <span class="skill__badge"><m3e-icon name="${group.icon}"></m3e-icon></span>
+          ${group[state.lang]}
+          <span class="skill__count">${group.items.length}</span>
+        </h3>
+        <div class="skill__chips">
+          ${group.items.map((item) => `<span class="chip">${item}</span>`).join("")}
+        </div>
       </div>
-    </article>
+    </m3e-card>
   `).join("");
 }
 
 function renderFilters() {
-  const group = $("#projectFilters");
-  group.innerHTML = FILTERS.map((item) => {
+  const set = $("#projectFilters");
+  set.innerHTML = FILTERS.map((item) => {
     const label = item[state.lang] || item.label;
-    const pressed = state.filter === item.key;
-    return `<button class="seg__item" type="button" data-filter="${item.key}" aria-pressed="${pressed}">${label}</button>`;
+    const selected = state.filter === item.key ? " selected" : "";
+    return `<m3e-filter-chip value="${item.key}"${selected}>${label}</m3e-filter-chip>`;
   }).join("");
 }
 
@@ -254,22 +256,30 @@ function renderProjects() {
   const grid = $("#projectsGrid");
   const visible = state.filter === "all" ? PROJECTS : PROJECTS.filter((p) => p.lang === state.filter);
   const featured = state.filter === "all" ? PROJECTS[0].name : null;
-  grid.innerHTML = visible.map((project) => `
-    <a class="project${project.name === featured ? " project--featured" : ""}" href="${project.url}" target="_blank" rel="noopener">
-      <div class="project__top">
-        <h3 class="project__name">${project.name}</h3>
-        <svg class="project__arrow icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-      </div>
-      <p class="project__desc">${project[state.lang]}</p>
-      <div class="project__foot">
-        <span class="project__lang"><span class="lang-dot" style="background:${project.color}"></span>${project.lang}</span>
-        <span class="project__stars" data-repo="${project.name}">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.8l6.5-.9Z"/></svg>
-          <span class="badge"><span class="loader" aria-hidden="true"></span></span>
-        </span>
-      </div>
+  grid.innerHTML = visible.map((project) => {
+    const isFeatured = project.name === featured;
+    return `
+    <a class="project-link" href="${project.url}" target="_blank" rel="noopener">
+      <m3e-card class="project${isFeatured ? " project--featured" : ""}" variant="${isFeatured ? "filled" : "outlined"}">
+        <div slot="content" class="project__inner">
+          <div class="project__top">
+            <h3 class="project__name">${project.name}</h3>
+            <m3e-icon class="project__arrow" name="arrow_outward"></m3e-icon>
+          </div>
+          <p class="project__desc">${project[state.lang]}</p>
+          <div class="project__foot">
+            <span class="project__lang"><span class="lang-dot" style="background:${project.color}"></span>${project.lang}</span>
+            <span class="project__stars" data-repo="${project.name}">
+              <m3e-icon name="star"></m3e-icon>
+              <m3e-loading-indicator class="star-loader"></m3e-loading-indicator>
+              <span class="project__stars-count"></span>
+            </span>
+          </div>
+        </div>
+      </m3e-card>
     </a>
-  `).join("");
+  `;
+  }).join("");
 
   hydrateStars();
 }
@@ -278,12 +288,19 @@ function renderProjects() {
    а GitHub отдаёт анонимно 60 запросов в час на IP. */
 const STARS = new Map();
 
+function paintStars(node, name) {
+  const loader = node.querySelector(".star-loader");
+  const count = node.querySelector(".project__stars-count");
+  if (loader) loader.remove();
+  if (count) count.textContent = STARS.get(name);
+}
+
 async function hydrateStars() {
   await Promise.all(PROJECTS.map(async (project) => {
-    const node = document.querySelector(`[data-repo="${project.name}"] .badge`);
+    const node = document.querySelector(`[data-repo="${project.name}"]`);
     if (!node) return;
     if (STARS.has(project.name)) {
-      node.textContent = STARS.get(project.name);
+      paintStars(node, project.name);
       return;
     }
     try {
@@ -295,7 +312,7 @@ async function hydrateStars() {
       /* rate limit or offline — show a dash instead of a spinner that never stops */
       STARS.set(project.name, "—");
     }
-    if (node.isConnected) node.textContent = STARS.get(project.name);
+    if (node.isConnected) paintStars(node, project.name);
   }));
 }
 
@@ -358,17 +375,16 @@ function init() {
   setupFab();
   $("#year").textContent = String(new Date().getFullYear());
 
-  $("#langGroup").addEventListener("click", (event) => {
-    const btn = event.target.closest("[data-lang]");
-    if (!btn || btn.dataset.lang === state.lang) return;
-    applyLanguage(btn.dataset.lang);
+  $("#langGroup").addEventListener("change", (event) => {
+    const value = event.target.value;
+    if (value && value !== state.lang) applyLanguage(value);
   });
 
-  $("#projectFilters").addEventListener("click", (event) => {
-    const btn = event.target.closest("[data-filter]");
-    if (!btn || btn.dataset.filter === state.filter) return;
-    state.filter = btn.dataset.filter;
-    renderFilters();
+  $("#projectFilters").addEventListener("change", (event) => {
+    const value = event.target.value;
+    const next = Array.isArray(value) ? value[0] : value;
+    if (!next || next === state.filter) return;
+    state.filter = next;
     renderProjects();
   });
 
