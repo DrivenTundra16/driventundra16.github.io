@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Matvey Samodurov — kyomufs</title>
 <meta name="description" content="Applied Informatics student, NixOS user, Go and TypeScript developer. Local-first AI tooling, Wayland desktops and reproducible infrastructure." />
-<meta name="theme-color" content="#0a0e17" />
+<meta name="theme-color" content="#121316" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Matvey Samodurov — kyomufs" />
 <meta property="og:description" content="Applied Informatics student, NixOS user, Go and TypeScript developer." />
@@ -13,17 +13,18 @@
 <link rel="icon" href="https://github.com/kyomufs.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/style.css" />
-<script>document.documentElement.classList.add("js");</script>
+<script>
+document.documentElement.classList.add("js");
+try {
+  var storedTheme = localStorage.getItem("kyomufs.theme");
+  if (!storedTheme) storedTheme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  document.documentElement.dataset.theme = storedTheme;
+} catch (e) {}
+</script>
 </head>
 <body>
-<div class="backdrop" aria-hidden="true">
-  <div class="backdrop__glow backdrop__glow--a"></div>
-  <div class="backdrop__glow backdrop__glow--b"></div>
-  <div class="backdrop__grid"></div>
-</div>
-
 <header class="nav">
   <div class="nav__inner">
     <a class="brand" href="#top">
@@ -52,7 +53,7 @@
       <p class="eyebrow" data-i18n="hero.eyebrow">Applied Informatics · Tula State University</p>
       <h1 class="hero__title">
         <span data-i18n="hero.first">Matvey</span>
-        <span class="gradient" data-i18n="hero.last">Samodurov</span>
+        <span class="hero__last" data-i18n="hero.last">Samodurov</span>
       </h1>
       <p class="hero__lead" data-i18n="hero.lead">
         I build tooling where infrastructure meets AI — reproducible systems, local-first services and interfaces that stay out of the way.
@@ -81,14 +82,14 @@
         </div>
         <pre class="terminal__body"><span class="t-prompt">$</span> whoami
 <span class="t-out">matvey — applied informatics, 3rd year</span>
-<span class="t-prompt">$</span> cat stack.txt
-<span class="t-out">nix · go · ts · python · dart</span>
-<span class="t-prompt">$</span> uname -a
-<span class="t-out">NixOS 26.05 · Hyprland · Wayland</span>
+<span class="t-prompt">$</span> nix flake show --all-systems
+<span class="t-out">desktop · services · secrets</span>
+<span class="t-prompt">$</span> nixos-version
+<span class="t-out">26.05 · Hyprland · Wayland</span>
 <span class="t-prompt">$</span> <span class="t-cursor">▍</span></pre>
       </div>
       <div class="avatar">
-        <img src="https://github.com/kyomufs.png" alt="kyomufs avatar" width="72" height="72" loading="lazy" />
+        <img src="https://github.com/kyomufs.png" alt="kyomufs avatar" width="40" height="40" loading="lazy" />
         <div>
           <p class="avatar__name">kyomufs</p>
           <p class="avatar__role" data-i18n="hero.avatarRole">systems · tooling · AI</p>
