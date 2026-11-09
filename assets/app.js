@@ -601,8 +601,8 @@ function setupTerminalCLI() {
   sudo     - run superuser command
   clear    - clear this output`,
     whoami: () => state.lang === "ru" 
-      ? "Матвей Самодуров — 3 курс «Прикладной информатики» ТулГУ (ИПОАС). Системный тулинг, NixOS, Wayland, Go, Dart." 
-      : "Matvey Samodurov — 3rd year student @ TSU (Applied Informatics). Systems tooling, NixOS, Wayland, Go, Dart.",
+      ? "Linux · Wayland · Open Source · AI · 3 курс · ТулГУ · Открыт к стажировкам · M3 Expressive · SystemsDev" 
+      : "Linux · Wayland · Open Source · AI · 3rd year · TSU · Open to internships · M3 Expressive · SystemsDev",
     skills: () => "C, C++, ASM, Go, TypeScript, Python, Dart, Kotlin, NixOS, Arch, Debian, Hyprland, Niri, MangoWM, Docker, PostgreSQL, AI Agents",
     projects: () => "tulgusch, free-ai-router, proxprobe, dsh-md3-theme, dsh-home-guard, free-ai-router-dshplugin",
     matrix: () => `Wake up, Neo...
