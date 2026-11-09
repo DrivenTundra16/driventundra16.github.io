@@ -500,6 +500,15 @@ function setupNav() {
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  const brand = $("#brandBtn");
+  if (brand) {
+    brand.addEventListener("click", (e) => {
+      e.preventDefault();
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    });
+  }
+
   const links = Array.from(document.querySelectorAll(".nav__links a"));
   const sections = links.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
   if (!("IntersectionObserver" in window) || !sections.length) return;

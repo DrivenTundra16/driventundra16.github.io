@@ -170,21 +170,22 @@ m3e-icon { --m3e-icon-size: 20px; }
   border-color: var(--md-sys-color-outline-variant);
   box-shadow: var(--elev-2);
 }
-.brand { display: inline-flex; align-items: center; gap: 10px; }
-.brand__mark {
-  display: grid;
-  place-items: center;
+.brand { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; }
+.brand__avatar {
+  display: block;
   width: 32px;
   height: 32px;
-  border-radius: var(--md-sys-shape-md);
-  background: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
-  font-family: var(--mono);
-  font-size: var(--ts-label-large-size);
-  font-weight: 700;
-  transition: border-radius var(--motion-fast-spatial);
+  border-radius: var(--md-sys-shape-full);
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 1px;
+  object-fit: cover;
+  transition: transform var(--motion-fast-spatial), outline-color var(--motion-fast-effects);
+  will-change: transform;
 }
-.brand:hover .brand__mark { border-radius: var(--md-sys-shape-full); }
+.brand:hover .brand__avatar {
+  transform: scale(1.08);
+  outline-color: var(--md-sys-color-tertiary);
+}
 .brand__text {
   font-size: var(--ts-title-medium-size);
   line-height: var(--ts-title-medium-line);
