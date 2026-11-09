@@ -68,7 +68,7 @@ export class SkillsGraph {
       { id: 'quickshell', label: 'Quickshell', cat: 'cat-wm' },
       { id: 'qml', label: 'Qt / QML', cat: 'cat-wm' },
       { id: 'layershell', label: 'Layer Shell', cat: 'cat-wm' },
-      { id: 'mangohud', label: 'MangoHud', cat: 'cat-wm' },
+      { id: 'mangowm', label: 'MangoWM', cat: 'cat-wm' },
 
       // Client & Mobile
       { id: 'flutter', label: 'Flutter', cat: 'cat-web' },
@@ -125,7 +125,7 @@ export class SkillsGraph {
       ['dsh', 'ts'],
       ['go', 'caddy'],
       ['routeros', 'openwrt'],
-      ['mangohud', 'linux']
+      ['mangowm', 'linux']
     ];
 
     this.nodes = [];

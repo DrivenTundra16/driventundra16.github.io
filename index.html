@@ -72,19 +72,19 @@ try {
       <div class="hero__meta sticker-wall">
         <div class="sticker sticker--accent" style="--sticker-rot: -2.5deg;">
           <m3e-icon name="terminal"></m3e-icon>
-          <span>NixOS 26.05</span>
+          <span>Linux</span>
         </div>
-        <div class="sticker" style="--sticker-rot: 2deg;">
+        <div class="sticker" style="--sticker-rot: 2.2deg;">
           <m3e-icon name="desktop_windows"></m3e-icon>
-          <span>Wayland Native</span>
+          <span>Wayland</span>
         </div>
         <div class="sticker sticker--secondary" style="--sticker-rot: -1.5deg;">
-          <m3e-icon name="auto_awesome"></m3e-icon>
-          <span>M3 Expressive</span>
+          <m3e-icon name="code"></m3e-icon>
+          <span>Open Source</span>
         </div>
         <div class="sticker sticker--tertiary" style="--sticker-rot: 3deg;">
           <m3e-icon name="psychology"></m3e-icon>
-          <span>Local-First AI</span>
+          <span>AI</span>
         </div>
         <div class="sticker" style="--sticker-rot: -2deg;">
           <m3e-icon name="school"></m3e-icon>
@@ -93,6 +93,14 @@ try {
         <div class="sticker" style="--sticker-rot: 1.5deg;">
           <m3e-badge class="dot-status" size="small" aria-hidden="true"></m3e-badge>
           <span data-i18n="hero.metaStatus">Open to internships</span>
+        </div>
+        <div class="sticker sticker--accent" style="--sticker-rot: -2deg;">
+          <m3e-icon name="auto_awesome"></m3e-icon>
+          <span>M3 Expressive</span>
+        </div>
+        <div class="sticker sticker--secondary" style="--sticker-rot: 2.5deg;">
+          <m3e-icon name="dns"></m3e-icon>
+          <span>SystemsDev</span>
         </div>
       </div>
     </div>
@@ -113,10 +121,6 @@ try {
             <button class="terminal__tab" data-pane="flake">
               <m3e-icon name="code"></m3e-icon>
               <span>flake.nix</span>
-            </button>
-            <button class="terminal__tab" data-pane="tulgusch">
-              <m3e-icon name="smartphone"></m3e-icon>
-              <span>tulgusch.dart</span>
             </button>
           </div>
           <button class="terminal__copy" id="termCopyBtn" aria-label="Copy terminal content">
@@ -143,7 +147,12 @@ try {
   <span class="t-pill" style="background:#c0caf5;"></span>
   <span class="t-pill" style="background:#414868;"></span>
 </div>
-<span class="t-prompt">kyomufs@asusfx506hc</span> <span class="t-out">~</span> <span class="t-prompt">$</span> <span class="t-cursor">█</span></div>
+<div class="terminal__prompt-line">
+  <span class="t-prompt">kyomufs</span> <span class="t-out">~</span> <span class="t-prompt">$</span>
+  <input id="termInput" class="term-input" placeholder="try: help, skills, matrix, whoami..." autocomplete="off" spellcheck="false" />
+  <span class="t-cursor">█</span>
+</div>
+<div id="termOutput" class="term-output"></div></div>
 
           <div class="terminal__pane" id="pane-flake"><span class="t-comment"># Single-source NixOS Flake infrastructure</span>
 <span class="t-kw">{</span>
@@ -159,22 +168,6 @@ try {
       modules = [ <span class="t-fn">./hosts/asusfx506hc</span> <span class="t-fn">./modules/desktop</span> ];
     <span class="t-kw">}</span>;
   <span class="t-kw">}</span>;
-<span class="t-kw">}</span></div>
-
-          <div class="terminal__pane" id="pane-tulgusch"><span class="t-comment">// Material 3 Expressive schedule companion</span>
-<span class="t-kw">class</span> <span class="t-fn">TulguschApp</span> <span class="t-kw">extends</span> StatelessWidget <span class="t-kw">{</span>
-  <span class="t-kw">@override</span>
-  Widget build(BuildContext context) <span class="t-kw">{</span>
-    <span class="t-kw">return</span> MaterialApp(
-      theme: ThemeData(
-        useMaterial3: <span class="t-str">true</span>,
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(<span class="t-str">0xFF7AA2F7</span>)),
-      ),
-      home: ExpressiveScheduleScreen(
-        motion: MotionScheme.expressive(spring: Springs.fastSpatial),
-      ),
-    );
-  <span class="t-kw">}</span>
 <span class="t-kw">}</span></div>
         </div>
       </m3e-card>

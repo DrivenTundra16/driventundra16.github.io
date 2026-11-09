@@ -486,6 +486,48 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 .terminal__pane { display: none; }
 .terminal__pane.is-active { display: block; }
 
+.terminal__prompt-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+.term-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  color: var(--md-sys-color-on-surface);
+  caret-color: var(--md-sys-color-primary);
+  padding: 0;
+}
+.term-input::placeholder {
+  color: var(--md-sys-color-on-surface-variant);
+  opacity: 0.55;
+  font-style: italic;
+}
+.term-output {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.term-output:not(:empty) {
+  padding: 8px 12px;
+  border-radius: var(--md-sys-shape-xs);
+  background: color-mix(in srgb, var(--md-sys-color-surface) 80%, black);
+  border-left: 3px solid var(--md-sys-color-primary);
+}
+#matrixCanvas {
+  display: block;
+  width: 100%;
+  height: 230px;
+  border-radius: var(--md-sys-shape-sm);
+  background: #000;
+}
+
 .t-prompt { color: var(--md-sys-color-primary); font-weight: 700; }
 .t-cmd { color: var(--md-sys-color-on-surface); font-weight: 600; }
 .t-out { color: var(--md-sys-color-on-surface-variant); }

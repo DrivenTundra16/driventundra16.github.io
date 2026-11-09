@@ -102,7 +102,7 @@ const SKILLS = [
     icon: "desktop_windows",
     en: "Wayland & Desktops",
     ru: "Wayland & Десктоп",
-    items: ["Hyprland", "Niri", "KDE Plasma", "GNOME", "Quickshell", "Qt / QML", "Layer Shell", "MangoHud"]
+    items: ["Hyprland", "Niri", "MangoWM", "KDE Plasma", "GNOME", "Quickshell", "Qt / QML", "Layer Shell"]
   },
   {
     icon: "layers",
@@ -567,6 +567,59 @@ function setupTerminalTabs() {
   }
 }
 
+function setupTerminalCLI() {
+  const input = $("#termInput");
+  const output = $("#termOutput");
+  if (!input || !output) return;
+
+  const commands = {
+    help: () => `Available commands:
+  whoami   - student profile & specializations
+  skills   - quick competencies overview
+  projects - list of highlighted projects
+  matrix   - 01001000 01101001 00100001
+  sudo     - run superuser command
+  clear    - clear this output`,
+    whoami: () => state.lang === "ru" 
+      ? "Матвей Самодуров — 3 курс «Прикладной информатики» ТулГУ (ИПОАС). Системный тулинг, NixOS, Wayland, Go, Dart." 
+      : "Matvey Samodurov — 3rd year student @ TSU (Applied Informatics). Systems tooling, NixOS, Wayland, Go, Dart.",
+    skills: () => "C, C++, ASM, Go, TypeScript, Python, Dart, Kotlin, NixOS, Arch, Debian, Hyprland, Niri, MangoWM, Docker, PostgreSQL, AI Agents",
+    projects: () => "tulgusch, free-ai-router, proxprobe, dsh-md3-theme, dsh-home-guard, free-ai-router-dshplugin",
+    matrix: () => `Wake up, Neo...
+The Matrix has you.
+Follow the white rabbit. 🐇
+01001011 01111001 01101111 01101101 01110101 01100110 01110011`,
+    sudo: () => "Permission denied: /nix/store is immutable & read-only on NixOS ❄️",
+    clear: () => { output.innerHTML = ""; return ""; }
+  };
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const val = input.value.trim().toLowerCase();
+      input.value = "";
+      if (!val) return;
+
+      const [cmd, ...args] = val.split(" ");
+      if (cmd === "clear") {
+        output.innerHTML = "";
+        return;
+      }
+
+      const handler = commands[cmd];
+      let res = "";
+      if (handler) {
+        res = handler(args);
+      } else {
+        res = `zsh: command not found: ${cmd}. Type 'help' for available commands.`;
+      }
+
+      if (res) {
+        output.innerHTML = `<span style="color:var(--md-sys-color-primary); font-weight:600;">$ ${cmd}</span>\n${res}`;
+      }
+    }
+  });
+}
+
 function init() {
   applyTheme(state.theme);
   applyLanguage(state.lang);
@@ -577,6 +630,7 @@ function init() {
   setupSkillsViewToggle();
   setupButtonGroups();
   setupTerminalTabs();
+  setupTerminalCLI();
   initGraph();
 
   $("#year").textContent = String(new Date().getFullYear());
