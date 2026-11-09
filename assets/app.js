@@ -118,9 +118,20 @@ const SKILLS = [
   },
   {
     icon: "hub",
-    en: "Network & Edge Routing",
-    ru: "Сетевой роутинг & Edge",
-    items: ["RouterOS (MikroTik)", "OpenWrt", "KeeneticOS", "Edge Routing & NAT", "VLAN Segmentation", "DNS / DHCP"]
+    en: "Network Systems & Edge Infrastructure",
+    ru: "Сетевая инфраструктура & Edge Routing",
+    items: [
+      "RouterOS (MikroTik)",
+      "OpenWrt Linux Stack",
+      "WireGuard & Mesh Overlays",
+      "Policy-Based Routing (PBR)",
+      "VLAN (802.1Q) Trunking",
+      "Reverse Proxy & TLS (Caddy)",
+      "Mihomo & Clash Cores",
+      "Encrypted DNS (DoH/DoT)",
+      "nftables / Firewalling",
+      "KeeneticOS"
+    ]
   },
   {
     icon: "auto_awesome",

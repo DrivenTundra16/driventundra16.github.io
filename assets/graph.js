@@ -30,7 +30,7 @@ export class SkillsGraph {
       { id: 'cat-wm', label: 'Wayland & Desktops', labelRu: 'Wayland & Десктоп', isHub: true, color: '#2ac3de', icon: 'desktop_windows', r: 18 },
       { id: 'cat-web', label: 'Client & Mobile', labelRu: 'Клиент & Мобилка', isHub: true, color: '#7dcfff', icon: 'layers', r: 18 },
       { id: 'cat-data', label: 'Databases', labelRu: 'Базы данных', isHub: true, color: '#73daca', icon: 'database', r: 18 },
-      { id: 'cat-net', label: 'Edge & Networks', labelRu: 'Сетевой роутинг', isHub: true, color: '#ff9e64', icon: 'hub', r: 18 },
+      { id: 'cat-net', label: 'Network Systems', labelRu: 'Сетевой стек & Edge', isHub: true, color: '#ff9e64', icon: 'hub', r: 18 },
       { id: 'cat-ai', label: 'AI & Agents', labelRu: 'AI & Агенты', isHub: true, color: '#f7768e', icon: 'auto_awesome', r: 18 }
     ];
 
@@ -83,12 +83,15 @@ export class SkillsGraph {
       { id: 'sa', label: 'SQLAlchemy', cat: 'cat-data' },
 
       // Edge & Networks
-      { id: 'routeros', label: 'RouterOS', cat: 'cat-net' },
-      { id: 'openwrt', label: 'OpenWrt', cat: 'cat-net' },
+      { id: 'routeros', label: 'RouterOS (MikroTik)', cat: 'cat-net' },
+      { id: 'openwrt', label: 'OpenWrt Stack', cat: 'cat-net' },
+      { id: 'wireguard', label: 'WireGuard / Overlays', cat: 'cat-net' },
+      { id: 'pbr', label: 'Policy Routing (PBR)', cat: 'cat-net' },
+      { id: 'vlan', label: '802.1Q VLAN Trunking', cat: 'cat-net' },
+      { id: 'mihomo', label: 'Mihomo / Clash Core', cat: 'cat-net' },
+      { id: 'doh', label: 'Encrypted DNS (DoH)', cat: 'cat-net' },
+      { id: 'nftables', label: 'nftables / Firewall', cat: 'cat-net' },
       { id: 'keenetic', label: 'KeeneticOS', cat: 'cat-net' },
-      { id: 'routing', label: 'Edge Routing & NAT', cat: 'cat-net' },
-      { id: 'vlan', label: 'VLAN Segmentation', cat: 'cat-net' },
-      { id: 'dnsdhcp', label: 'DNS / DHCP', cat: 'cat-net' },
 
       // AI & Agents
       { id: 'dsh', label: 'DeepSeek Harness', cat: 'cat-ai' },
@@ -124,6 +127,9 @@ export class SkillsGraph {
       ['dsh', 'opencode'],
       ['dsh', 'ts'],
       ['go', 'caddy'],
+      ['wireguard', 'linux'],
+      ['nftables', 'linux'],
+      ['mihomo', 'go'],
       ['routeros', 'openwrt'],
       ['mangowm', 'linux']
     ];
